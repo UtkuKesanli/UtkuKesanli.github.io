@@ -1,0 +1,41 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import ExperienceCard from './ExperienceCard.astro';
+import { experiences } from '../data/experience';
+---
+
+<section class="portfolio-section" id="experience" aria-labelledby="experience-title">
+  <SectionHeading
+    index="04"
+    title="Experience"
+    description="Professional experience where mobile development, AI workflows and product thinking came together."
+  />
+
+  <div class="experience-list">
+    {experiences.map((experience, index) => (
+      <ExperienceCard experience={experience} index={index} />
+    ))}
+  </div>
+</section>
+
+<style>
+  .portfolio-section {
+    width: min(calc(100% - 2rem), var(--max-width));
+    margin: 0 auto;
+    padding: clamp(5rem, 9vw, 8rem) 0;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: calc(var(--topbar-height) + 24px);
+  }
+
+  .experience-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (max-width: 760px) {
+    .portfolio-section {
+      width: min(calc(100% - 1.25rem), var(--max-width));
+      padding: 4rem 0;
+    }
+  }
+</style>
