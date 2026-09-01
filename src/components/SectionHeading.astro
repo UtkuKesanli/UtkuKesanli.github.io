@@ -1,0 +1,87 @@
+---
+type Props = {
+  index: string;
+  title: string;
+  description?: string;
+};
+
+const { index, title, description } = Astro.props;
+---
+
+<header class="section-heading">
+  <div class="label-row">
+    <span class="index">{index}</span>
+    <span class="line" aria-hidden="true"></span>
+  </div>
+  <div class="copy">
+    <h2>{title}</h2>
+    {description && <p>{description}</p>}
+  </div>
+</header>
+
+<style>
+  .section-heading {
+    display: grid;
+    grid-template-columns: minmax(80px, 0.28fr) minmax(0, 1fr);
+    gap: clamp(1.25rem, 3vw, 3rem);
+    align-items: start;
+    margin-bottom: clamp(1.75rem, 4vw, 3rem);
+  }
+
+  .label-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 0.55rem;
+  }
+
+  .index {
+    color: var(--accent);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+  }
+
+  .line {
+    height: 1px;
+    flex: 1;
+    background: var(--line-strong);
+  }
+
+  .copy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 0.7fr);
+    gap: 2rem;
+    align-items: end;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(2.4rem, 5vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 760px) {
+    .section-heading {
+      grid-template-columns: 1fr;
+      gap: 0.8rem;
+    }
+
+    .label-row {
+      width: 110px;
+    }
+
+    .copy {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>
