@@ -1,0 +1,105 @@
+<aside class="profile-panel" aria-label="Profile summary">
+  <div class="profile-mark" aria-hidden="true">UK</div>
+
+  <div class="profile-copy">
+    <p class="kicker">PROFILE</p>
+    <h1>Utku Keşanlı</h1>
+    <p class="role">Flutter Developer · Mobile Product Designer</p>
+    <p class="summary">
+      I design and build mobile products from first idea to release, combining
+      Flutter engineering, Firebase and product-focused UI/UX.
+    </p>
+  </div>
+
+  <div class="meta">
+    <span>İzmir, Türkiye</span>
+    <a href="#about">About me ↓</a>
+  </div>
+</aside>
+
+<style>
+  .profile-panel {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: clamp(1.35rem, 2.4vw, 2rem);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-lg);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 38%),
+      var(--surface);
+  }
+
+  .profile-mark {
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .kicker {
+    margin: 0 0 0.7rem;
+    color: var(--accent);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+  }
+
+  h1 {
+    margin: 0;
+    max-width: 9ch;
+    font-size: clamp(2.5rem, 5vw, 5.2rem);
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+  }
+
+  .role {
+    margin: 1.1rem 0 0;
+    color: var(--text);
+    font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+    line-height: 1.45;
+  }
+
+  .summary {
+    margin: 1rem 0 0;
+    max-width: 34rem;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+
+  .meta {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+  }
+
+  .meta a {
+    color: var(--text);
+  }
+
+  .meta a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .profile-panel {
+      min-height: 480px;
+    }
+
+    h1 {
+      max-width: none;
+    }
+  }
+</style>
