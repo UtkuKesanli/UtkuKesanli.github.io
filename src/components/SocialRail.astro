@@ -1,0 +1,101 @@
+---
+import { socialLinks } from '../data/socialLinks';
+---
+
+<aside class="social-rail" aria-label="External links">
+  <div class="rail-label">LINKS</div>
+  <nav>
+    {socialLinks.map((link) => (
+      <a
+        href={link.href}
+        target={link.href.startsWith('http') ? '_blank' : undefined}
+        rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+        aria-label={link.label}
+        class:list={{ disabled: link.href === '#' }}
+      >
+        <span class="short">{link.shortLabel}</span>
+        <span class="full">{link.label}</span>
+      </a>
+    ))}
+  </nav>
+</aside>
+
+<style>
+  .social-rail {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 20;
+    width: var(--rail-width);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 0 1rem;
+    border-right: 1px solid var(--line);
+    background: rgba(10, 10, 10, 0.88);
+    backdrop-filter: blur(16px);
+  }
+
+  .rail-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 0.65rem;
+    letter-spacing: 0.24em;
+    color: var(--text-muted);
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  a {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+  }
+
+  a:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .full {
+    position: absolute;
+    left: calc(100% + 0.7rem);
+    padding: 0.45rem 0.65rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-8px);
+    transition: opacity 180ms ease, transform 180ms ease;
+    white-space: nowrap;
+  }
+
+  a:hover .full {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .disabled {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  @media (max-width: 860px) {
+    .social-rail {
+      display: none;
+    }
+  }
+</style>
