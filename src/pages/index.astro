@@ -1,0 +1,31 @@
+---
+import Hero from '../components/Hero.astro';
+import SocialRail from '../components/SocialRail.astro';
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta
+      name="description"
+      content="Portfolio of Utku Keşanlı — Flutter developer and mobile product builder."
+    />
+    <title>Utku Keşanlı — Flutter Developer</title>
+  </head>
+  <body>
+    <div class="site-shell">
+      <SocialRail />
+      <main>
+        <Hero />
+        <section class="section-placeholder" id="about" aria-label="About"></section>
+        <section class="section-placeholder" id="projects" aria-label="Projects"></section>
+        <section class="section-placeholder" id="experience" aria-label="Experience"></section>
+        <section class="section-placeholder" id="skills" aria-label="Skills"></section>
+        <section class="section-placeholder" id="contact" aria-label="Contact"></section>
+      </main>
+    </div>
+  </body>
+</html>
