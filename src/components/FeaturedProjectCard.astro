@@ -1,0 +1,167 @@
+---
+import type { Project } from '../data/projects';
+
+type Props = {
+  project: Project;
+  index: number;
+};
+
+const { project, index } = Astro.props;
+const indexLabel = String(index + 1).padStart(2, '0');
+const href = project.href ?? '#projects';
+---
+
+<a
+  class="project-card"
+  href={href}
+  target={project.href?.startsWith('http') ? '_blank' : undefined}
+  rel={project.href?.startsWith('http') ? 'noreferrer' : undefined}
+  aria-label={`${project.title} project`}
+>
+  <div class="card-top">
+    <span class="index">{indexLabel}</span>
+    <span class="status">{project.status}</span>
+    <span class="year">{project.year}</span>
+  </div>
+
+  <div class="card-copy">
+    <h2>{project.title}</h2>
+    <p>{project.shortDescription}</p>
+  </div>
+
+  <div class="card-bottom">
+    <ul aria-label="Technologies">
+      {project.technologies.slice(0, 4).map((technology) => <li>{technology}</li>)}
+    </ul>
+    <span class="open" aria-hidden="true">↗</span>
+  </div>
+</a>
+
+<style>
+  .project-card {
+    position: relative;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.2rem;
+    overflow: hidden;
+    padding: clamp(1.2rem, 2vw, 1.6rem);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    transition: border-color 180ms ease, transform 220ms var(--ease-out), background 180ms ease;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    width: 230px;
+    aspect-ratio: 1;
+    right: -110px;
+    bottom: -140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-soft-strong), transparent 68%);
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 220ms ease, transform 320ms var(--ease-out);
+    pointer-events: none;
+  }
+
+  .project-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(143, 124, 255, 0.55);
+    background: var(--surface-soft);
+  }
+
+  .project-card:hover::after {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .card-top,
+  .card-bottom {
+    display: flex;
+    align-items: center;
+  }
+
+  .card-top {
+    gap: 0.8rem;
+    color: var(--text-muted);
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .index {
+    color: var(--accent);
+    font-weight: 800;
+  }
+
+  .status {
+    padding: 0.28rem 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+
+  .year {
+    margin-left: auto;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 4.6rem);
+    line-height: 0.92;
+    letter-spacing: -0.055em;
+  }
+
+  .card-copy p {
+    margin: 0.8rem 0 0;
+    max-width: 48rem;
+    color: var(--text-muted);
+    font-size: clamp(0.82rem, 1.1vw, 0.98rem);
+    line-height: 1.55;
+  }
+
+  .card-bottom {
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    color: var(--text-muted);
+    font-size: 0.65rem;
+  }
+
+  li:not(:last-child)::after {
+    content: ' ·';
+  }
+
+  .open {
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+  }
+
+  .project-card:hover .open {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #0a0a0a;
+  }
+</style>
