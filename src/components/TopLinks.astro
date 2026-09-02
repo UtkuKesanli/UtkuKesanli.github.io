@@ -1,26 +1,85 @@
 ---
 import { socialLinks } from '../data/socialLinks';
+
+const sectionLinks = [
+  { label: 'About', href: '#about', id: 'about' },
+  { label: 'Projects', href: '#projects', id: 'projects' },
+  { label: 'Experience', href: '#experience', id: 'experience' },
+  { label: 'Skills', href: '#skills', id: 'skills' },
+  { label: 'Contact', href: '#contact', id: 'contact' },
+];
 ---
 
-<header class="top-links" aria-label="External links">
+<header class="top-links" aria-label="Portfolio navigation">
   <nav>
-    <span class="label">LINKS</span>
-    <div class="items">
-      {socialLinks.map((link) => (
-        <a
-          href={link.href}
-          target={link.href.startsWith('http') ? '_blank' : undefined}
-          rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-          class:list={{ disabled: link.href === '#' }}
-          aria-label={link.label}
-        >
-          <span>{link.label}</span>
-          {link.href !== '#' && <span class="arrow" aria-hidden="true">↗</span>}
-        </a>
-      ))}
+    <a class="home-link" href="#home" aria-label="Back to top">UK</a>
+
+    <div class="nav-scroll">
+      <div class="section-links" aria-label="Page sections">
+        {sectionLinks.map((link) => (
+          <a href={link.href} data-section-link={link.id}>{link.label}</a>
+        ))}
+      </div>
+
+      <span class="divider" aria-hidden="true"></span>
+
+      <div class="social-links" aria-label="External links">
+        {socialLinks.map((link) => (
+          <a
+            href={link.href}
+            target={link.href.startsWith('http') ? '_blank' : undefined}
+            rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+            aria-label={link.label}
+          >
+            <span class="social-full">{link.label}</span>
+            <span class="social-short">{link.shortLabel}</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </div>
     </div>
   </nav>
 </header>
+
+<script>
+  const initialiseSectionNavigation = () => {
+    const links = Array.from(document.querySelectorAll<HTMLElement>('[data-section-link]'));
+    if (!links.length) return;
+
+    const byId = new Map(links.map((link) => [link.dataset.sectionLink, link]));
+    const sections = Array.from(byId.keys())
+      .map((id) => (id ? document.getElementById(id) : null))
+      .filter((section): section is HTMLElement => section instanceof HTMLElement);
+
+    const setActive = (id?: string) => {
+      links.forEach((link) => {
+        const active = Boolean(id) && link.dataset.sectionLink === id;
+        link.classList.toggle('is-active', active);
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible?.target instanceof HTMLElement) setActive(visible.target.id);
+      },
+      {
+        rootMargin: '-28% 0px -58% 0px',
+        threshold: [0, 0.1, 0.35, 0.6],
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  };
+
+  initialiseSectionNavigation();
+  document.addEventListener('astro:page-load', initialiseSectionNavigation);
+</script>
 
 <style>
   .top-links {
@@ -36,63 +95,120 @@ import { socialLinks } from '../data/socialLinks';
     min-height: var(--topbar-height);
     display: flex;
     align-items: center;
-    gap: 1rem;
-    padding: 0.45rem 0.55rem 0.45rem 1rem;
+    gap: 0.45rem;
+    padding: 0.4rem 0.5rem;
     border: 1px solid var(--line-strong);
     border-radius: 999px;
-    background: rgba(10, 10, 10, 0.82);
-    backdrop-filter: blur(14px);
+    background: rgba(10, 10, 10, 0.9);
+    backdrop-filter: blur(10px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
   }
 
-  .label {
+  .home-link {
     flex: 0 0 auto;
-    color: var(--text-muted);
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    color: var(--accent);
     font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    transition: border-color 160ms ease, background 160ms ease;
   }
 
-  .items {
+  .home-link:hover {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .nav-scroll {
     min-width: 0;
     flex: 1;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    gap: 0.2rem;
+    gap: 0.4rem;
     overflow-x: auto;
     scrollbar-width: none;
   }
 
-  .items::-webkit-scrollbar {
+  .nav-scroll::-webkit-scrollbar {
     display: none;
   }
 
-  a {
+  .section-links,
+  .social-links {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+  }
+
+  .section-links a,
+  .social-links a {
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.3rem;
     flex: 0 0 auto;
-    padding: 0.55rem 0.8rem;
+    min-height: 34px;
+    padding: 0.45rem 0.7rem;
     border-radius: 999px;
     color: var(--text-muted);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     transition: color 160ms ease, background 160ms ease;
   }
 
-  a:hover {
+  .section-links a:hover,
+  .social-links a:hover,
+  .section-links a.is-active {
     color: var(--text);
     background: var(--surface-soft);
   }
 
-  .arrow {
-    color: var(--accent);
-    font-size: 0.7rem;
+  .section-links a.is-active {
+    box-shadow: inset 0 0 0 1px rgba(143, 124, 255, 0.22);
   }
 
-  .disabled {
-    opacity: 0.35;
-    pointer-events: none;
+  .section-links a.is-active::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .divider {
+    flex: 0 0 auto;
+    width: 1px;
+    height: 20px;
+    margin: 0 0.25rem;
+    background: var(--line-strong);
+  }
+
+  .social-links {
+    margin-left: auto;
+  }
+
+  .arrow {
+    color: var(--accent);
+    font-size: 0.66rem;
+  }
+
+  .social-short {
+    display: none;
+  }
+
+  @media (max-width: 940px) {
+    .social-full {
+      display: none;
+    }
+
+    .social-short {
+      display: inline;
+    }
   }
 
   @media (max-width: 640px) {
@@ -102,15 +218,20 @@ import { socialLinks } from '../data/socialLinks';
     }
 
     nav {
-      padding-left: 0.8rem;
+      gap: 0.3rem;
+      padding: 0.35rem 0.4rem;
     }
 
-    .label {
-      display: none;
+    .home-link {
+      width: 32px;
+      height: 32px;
     }
 
-    .items {
-      justify-content: flex-start;
+    .section-links a,
+    .social-links a {
+      min-height: 32px;
+      padding: 0.4rem 0.62rem;
+      font-size: 0.67rem;
     }
   }
 </style>
