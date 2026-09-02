@@ -83,7 +83,7 @@ body .project-card .project-icon {
 
 @media (max-width: 560px) {
   body .project-card .project-identity-row {
-    gap: 2rem;
+    gap: 1.35rem;
   }
 
   body .project-card .project-icon {
