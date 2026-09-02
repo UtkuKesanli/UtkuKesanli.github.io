@@ -1,0 +1,147 @@
+---
+import type { ProjectDetail } from '../data/projects';
+
+type Props = {
+  title: string;
+  details: ProjectDetail[];
+};
+
+const { title, details } = Astro.props;
+---
+
+<details class="project-details">
+  <summary>
+    <span class="summary-copy">
+      <span class="label-closed">Show more</span>
+      <span class="label-open">Show less</span>
+      <small>Full {title} project notes</small>
+    </span>
+    <span class="summary-icon" aria-hidden="true">+</span>
+  </summary>
+
+  <div class="details-grid">
+    {details.map((detail) => (
+      <section>
+        <h4>{detail.title}</h4>
+        <p>{detail.text}</p>
+      </section>
+    ))}
+  </div>
+</details>
+
+<style>
+  .project-details {
+    width: 100%;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.012);
+    overflow: hidden;
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    min-height: 72px;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .summary-copy {
+    display: grid;
+    justify-items: center;
+    gap: 0.15rem;
+    text-align: center;
+  }
+
+  .label-closed,
+  .label-open {
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 750;
+  }
+
+  .label-open {
+    display: none;
+  }
+
+  small {
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+  }
+
+  .summary-icon {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    color: var(--project-accent);
+    font-size: 1.15rem;
+    transition: transform 260ms var(--ease-out), border-color 180ms ease;
+  }
+
+  summary:hover .summary-icon {
+    border-color: var(--project-accent);
+  }
+
+  .project-details[open] .label-closed {
+    display: none;
+  }
+
+  .project-details[open] .label-open {
+    display: inline;
+  }
+
+  .project-details[open] .summary-icon {
+    transform: rotate(45deg);
+  }
+
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    border-top: 1px solid var(--line);
+    background: var(--line);
+  }
+
+  section {
+    min-width: 0;
+    padding: clamp(1.25rem, 2.2vw, 1.8rem);
+    background: #0d0d0d;
+  }
+
+  h4 {
+    margin: 0 0 0.65rem;
+    color: var(--project-accent);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin: 0;
+    color: rgba(244, 242, 237, 0.8);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 620px) {
+    .details-grid {
+      grid-template-columns: 1fr;
+    }
+
+    summary {
+      min-height: 66px;
+    }
+  }
+</style>
