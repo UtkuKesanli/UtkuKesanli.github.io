@@ -20,6 +20,7 @@ export const projects: Project[] = [
     year: '2026',
     technologies: ['Flutter', 'Firebase', 'AI', 'IAP'],
     featured: true,
+    href: 'https://apps.apple.com/tr/app/talevd/id6788747924',
   },
   {
     slug: 'evender',
