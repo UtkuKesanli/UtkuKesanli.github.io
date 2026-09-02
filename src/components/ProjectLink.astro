@@ -1,0 +1,47 @@
+---
+type Props = {
+  href: string;
+  label: string;
+};
+
+const { href, label } = Astro.props;
+const external = href.startsWith('http');
+---
+
+<div class="project-link-component">
+  <a
+    href={href}
+    target={external ? '_blank' : undefined}
+    rel={external ? 'noreferrer' : undefined}
+  >
+    <span>{label}</span>
+    <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
+<style>
+  .project-link-component {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.35rem 0.15rem;
+    color: var(--project-accent);
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    transition: color 180ms ease, transform 180ms ease;
+  }
+
+  a:hover,
+  a:focus-visible {
+    color: var(--text);
+    transform: translateY(-1px);
+  }
+</style>
