@@ -35,7 +35,13 @@ export const projects: Project[] = [
     href: 'https://apps.apple.com/tr/app/talevd/id6788747924',
     linkLabel: 'View on App Store',
     icon: '/projects/talevd/icon.webp',
-    images: ['/projects/talevd/create.webp', '/projects/talevd/story.webp', '/projects/talevd/premium.webp'],
+    images: [
+      '/projects/talevd/create.webp',
+      '/projects/talevd/library.webp',
+      '/projects/talevd/story.webp',
+      '/projects/talevd/premium.webp',
+      '/projects/talevd/manage.webp',
+    ],
   },
   {
     slug: 'focial',
@@ -55,7 +61,13 @@ export const projects: Project[] = [
     href: 'https://www.figma.com/design/GBq1Lk2WUMl7pBrh3gwc6r/Focial?m=auto&t=FnJofA8SSdlfZAvF-1',
     linkLabel: 'Explore in Figma',
     icon: '/projects/focial/icon.webp',
-    images: ['/projects/focial/all-in-one.webp', '/projects/focial/forky.webp', '/projects/focial/share.webp'],
+    images: [
+      '/projects/focial/all-in-one.webp',
+      '/projects/focial/recipes.webp',
+      '/projects/focial/forky.webp',
+      '/projects/focial/share.webp',
+      '/projects/focial/profile.webp',
+    ],
   },
   {
     slug: 'evender',
