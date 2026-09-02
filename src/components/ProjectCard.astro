@@ -1,5 +1,7 @@
 ---
 import type { Project } from '../data/projects';
+import ProjectDetails from './ProjectDetails.astro';
+import ProjectLink from './ProjectLink.astro';
 
 type Props = {
   project: Project;
@@ -8,7 +10,6 @@ type Props = {
 
 const { project, index } = Astro.props;
 const displayIndex = String(index + 1).padStart(2, '0');
-const external = project.href?.startsWith('http');
 const images = project.images ?? [];
 const hasCarousel = images.length > 0;
 ---
@@ -37,10 +38,20 @@ const hasCarousel = images.length > 0;
 
         {images.length > 1 && (
           <>
-            <button class="carousel-button carousel-button--previous" type="button" data-carousel-previous aria-label={`Previous ${project.title} image`}>
+            <button
+              class="carousel-button carousel-button--previous"
+              type="button"
+              data-carousel-previous
+              aria-label={`Previous ${project.title} image`}
+            >
               ←
             </button>
-            <button class="carousel-button carousel-button--next" type="button" data-carousel-next aria-label={`Next ${project.title} image`}>
+            <button
+              class="carousel-button carousel-button--next"
+              type="button"
+              data-carousel-next
+              aria-label={`Next ${project.title} image`}
+            >
               →
             </button>
 
@@ -89,21 +100,9 @@ const hasCarousel = images.length > 0;
           <p class="project-subtitle">{project.subtitle}</p>
         </div>
       </div>
-
-      {project.href && (
-        <div class="project-link-row">
-          <a
-            class="project-link"
-            href={project.href}
-            target={external ? '_blank' : undefined}
-            rel={external ? 'noreferrer' : undefined}
-          >
-            <span>{project.linkLabel ?? 'View project'}</span>
-            <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-      )}
     </header>
+
+    {project.href && <ProjectLink href={project.href} label={project.linkLabel ?? 'View project'} />}
 
     <div class="description-box">
       <p class="project-description">{project.shortDescription}</p>
@@ -116,6 +115,8 @@ const hasCarousel = images.length > 0;
         {project.technologies.map((technology) => <span>{technology}</span>)}
       </div>
     </div>
+
+    <ProjectDetails title={project.title} details={project.details} />
   </div>
 </article>
 
@@ -224,7 +225,7 @@ const hasCarousel = images.length > 0;
     border-radius: var(--radius-lg);
     background:
       radial-gradient(circle at 15% 50%, var(--project-accent-soft), transparent 36%),
-      linear-gradient(145deg, rgba(255,255,255,0.025), rgba(255,255,255,0.008));
+      linear-gradient(145deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.008));
   }
 
   .project-card[data-project='talevd'] {
@@ -304,7 +305,7 @@ const hasCarousel = images.length > 0;
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
     filter: saturate(1);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.4), 0 0 42px var(--project-accent-soft);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 42px var(--project-accent-soft);
   }
 
   .project-slide.is-previous {
@@ -332,7 +333,7 @@ const hasCarousel = images.length > 0;
     padding: 0;
     border: 1px solid var(--line-strong);
     border-radius: 50%;
-    background: rgba(10,10,10,0.9);
+    background: rgba(10, 10, 10, 0.9);
     color: var(--text);
     font: inherit;
     opacity: 0;
@@ -347,8 +348,13 @@ const hasCarousel = images.length > 0;
     color: var(--project-accent);
   }
 
-  .carousel-button--previous { left: 0; }
-  .carousel-button--next { right: 0; }
+  .carousel-button--previous {
+    left: 0;
+  }
+
+  .carousel-button--next {
+    right: 0;
+  }
 
   .project-carousel:hover .carousel-button,
   .project-carousel:focus-within .carousel-button {
@@ -416,8 +422,17 @@ const hasCarousel = images.length > 0;
     box-shadow: 0 0 16px var(--project-accent);
   }
 
-  .development-orbit--outer { width: 250px; height: 250px; }
-  .development-orbit--inner { width: 176px; height: 176px; animation-direction: reverse; animation-duration: 10s; }
+  .development-orbit--outer {
+    width: 250px;
+    height: 250px;
+  }
+
+  .development-orbit--inner {
+    width: 176px;
+    height: 176px;
+    animation-direction: reverse;
+    animation-duration: 10s;
+  }
 
   .development-core {
     position: relative;
@@ -442,22 +457,20 @@ const hasCarousel = images.length > 0;
 
   .information-column {
     display: grid;
-    grid-template-rows: auto 1fr;
     align-content: start;
-    gap: clamp(2rem, 4vw, 3rem);
+    gap: clamp(1.25rem, 2.4vw, 1.8rem);
     min-width: 0;
   }
 
   .project-heading {
     display: grid;
-    gap: 1rem;
   }
 
   .project-identity-row {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(1rem, 2vw, 1.5rem);
+    gap: clamp(4rem, 6vw, 5rem);
     width: 100%;
   }
 
@@ -470,11 +483,11 @@ const hasCarousel = images.length > 0;
     flex: 0 0 auto;
     display: grid;
     place-items: center;
-    width: 82px;
-    height: 82px;
+    width: 150px;
+    height: 150px;
     overflow: hidden;
     border: 1px solid var(--line-strong);
-    border-radius: 20px;
+    border-radius: 26px;
     background: #111;
     box-shadow: 0 16px 45px rgba(0, 0, 0, 0.24);
   }
@@ -487,7 +500,7 @@ const hasCarousel = images.length > 0;
 
   .project-icon--fallback {
     color: var(--project-accent);
-    font-size: 1rem;
+    font-size: 1.15rem;
     font-weight: 700;
     letter-spacing: 0.12em;
     background: var(--project-accent-soft);
@@ -522,57 +535,33 @@ const hasCarousel = images.length > 0;
   }
 
   .project-subtitle {
-    margin: 0.55rem 0 0;
+    margin: 0.6rem 0 0;
     max-width: 620px;
-    color: rgba(244, 242, 237, 0.74);
-    font-size: 0.92rem;
+    color: rgba(244, 242, 237, 0.75);
+    font-size: 0.94rem;
     line-height: 1.5;
-  }
-
-  .project-link-row {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 0.1rem;
-  }
-
-  .project-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.45rem;
-    padding: 0.15rem 0;
-    color: var(--project-accent);
-    font-size: 0.82rem;
-    font-weight: 650;
-    transition: color 180ms ease, transform 180ms ease;
-  }
-
-  .project-link:hover {
-    color: var(--text);
-    transform: translateY(-1px);
   }
 
   .description-box {
     align-self: start;
     display: grid;
-    gap: 1.6rem;
-    padding: clamp(1.5rem, 3vw, 2.4rem);
+    gap: 1.75rem;
+    padding: clamp(1.65rem, 3vw, 2.55rem);
     border: 1px solid var(--line-strong);
     border-radius: var(--radius-md);
-    background: rgba(255,255,255,0.016);
+    background: rgba(255, 255, 255, 0.016);
   }
 
   .project-description {
     margin: 0;
-    color: rgba(244, 242, 237, 0.88);
-    font-size: clamp(0.98rem, 1.4vw, 1.1rem);
-    line-height: 1.72;
+    color: rgba(244, 242, 237, 0.9);
+    font-size: clamp(1.06rem, 1.45vw, 1.2rem);
+    line-height: 1.78;
   }
 
   .project-highlights {
     display: grid;
-    gap: 0.65rem;
+    gap: 0.72rem;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -582,7 +571,7 @@ const hasCarousel = images.length > 0;
     position: relative;
     padding-left: 1.15rem;
     color: var(--text);
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     line-height: 1.55;
   }
 
@@ -607,12 +596,26 @@ const hasCarousel = images.length > 0;
     padding: 0.42rem 0.62rem;
     border: 1px solid var(--line);
     border-radius: 999px;
-    color: rgba(244, 242, 237, 0.7);
+    color: rgba(244, 242, 237, 0.72);
     font-size: 0.68rem;
   }
 
   @keyframes orbit {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .project-identity-row {
+      gap: clamp(2.5rem, 4vw, 3.5rem);
+    }
+
+    .project-icon {
+      width: 126px;
+      height: 126px;
+      border-radius: 23px;
+    }
   }
 
   @media (max-width: 900px) {
@@ -646,12 +649,13 @@ const hasCarousel = images.length > 0;
     .project-identity-row {
       justify-content: flex-start;
       align-items: flex-start;
+      gap: 1.5rem;
     }
 
     .project-icon {
-      width: 68px;
-      height: 68px;
-      border-radius: 16px;
+      width: 82px;
+      height: 82px;
+      border-radius: 19px;
     }
 
     h3 {
@@ -674,7 +678,7 @@ const hasCarousel = images.length > 0;
     }
 
     .description-box {
-      padding: 1.25rem;
+      padding: 1.3rem;
     }
   }
 
