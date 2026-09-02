@@ -8,16 +8,9 @@ type Props = {
 
 const { project, index } = Astro.props;
 const indexLabel = String(index + 1).padStart(2, '0');
-const href = project.href ?? '#projects';
 ---
 
-<a
-  class="project-card"
-  href={href}
-  target={project.href?.startsWith('http') ? '_blank' : undefined}
-  rel={project.href?.startsWith('http') ? 'noreferrer' : undefined}
-  aria-label={`${project.title} project`}
->
+<a class="project-card" href="#projects" aria-label={`Jump to ${project.title} project details`}>
   <div class="card-top">
     <span class="index">{indexLabel}</span>
     <span class="status">{project.status}</span>
@@ -25,15 +18,15 @@ const href = project.href ?? '#projects';
   </div>
 
   <div class="card-copy">
+    <p class="eyebrow">PROJECT INDEX</p>
     <h2>{project.title}</h2>
-    <p>{project.shortDescription}</p>
   </div>
 
   <div class="card-bottom">
     <ul aria-label="Technologies">
       {project.technologies.slice(0, 4).map((technology) => <li>{technology}</li>)}
     </ul>
-    <span class="open" aria-hidden="true">↗</span>
+    <span class="details-link">Full project below ↓</span>
   </div>
 </a>
 
@@ -108,19 +101,19 @@ const href = project.href ?? '#projects';
     margin-left: auto;
   }
 
-  h2 {
-    margin: 0;
-    font-size: clamp(2rem, 4vw, 4.6rem);
-    line-height: 0.92;
-    letter-spacing: -0.055em;
+  .eyebrow {
+    margin: 0 0 0.45rem;
+    color: var(--text-muted);
+    font-size: 0.58rem;
+    font-weight: 750;
+    letter-spacing: 0.16em;
   }
 
-  .card-copy p {
-    margin: 0.8rem 0 0;
-    max-width: 48rem;
-    color: var(--text-muted);
-    font-size: clamp(0.82rem, 1.1vw, 0.98rem);
-    line-height: 1.55;
+  h2 {
+    margin: 0;
+    font-size: clamp(2.25rem, 4.4vw, 5rem);
+    line-height: 0.9;
+    letter-spacing: -0.06em;
   }
 
   .card-bottom {
@@ -146,22 +139,23 @@ const href = project.href ?? '#projects';
     content: ' ·';
   }
 
-  .open {
+  .details-link {
     position: relative;
     z-index: 1;
     flex: 0 0 auto;
-    width: 2rem;
-    height: 2rem;
-    display: grid;
-    place-items: center;
-    border: 1px solid var(--line-strong);
-    border-radius: 50%;
-    transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+    color: var(--accent);
+    font-size: 0.68rem;
+    font-weight: 700;
   }
 
-  .project-card:hover .open {
-    border-color: var(--accent);
-    background: var(--accent);
-    color: #0a0a0a;
+  @media (max-width: 560px) {
+    .card-bottom {
+      align-items: flex-end;
+    }
+
+    .details-link {
+      max-width: 7rem;
+      text-align: right;
+    }
   }
 </style>
