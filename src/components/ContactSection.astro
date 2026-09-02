@@ -1,0 +1,262 @@
+---
+import SectionHeading from './SectionHeading.astro';
+import { socialLinks } from '../data/socialLinks';
+
+const email = socialLinks.find((link) => link.label === 'Email');
+const externalLinks = socialLinks.filter((link) => link.label !== 'Email');
+---
+
+<section class="contact-section" id="contact" aria-labelledby="contact-title">
+  <div class="contact-inner">
+    <SectionHeading
+      index="06"
+      title="Contact"
+      description="For mobile development roles, product collaborations or simply a conversation about something worth building."
+    />
+
+    <div class="contact-card">
+      <div class="contact-copy">
+        <p class="eyebrow">LET’S BUILD SOMETHING USEFUL</p>
+        <h3>Have an opportunity, product or idea in mind?</h3>
+        <p>
+          I am open to mobile development opportunities and product-focused collaborations.
+          The fastest way to reach me is by email; you can also find my work and background through the links below.
+        </p>
+      </div>
+
+      <div class="contact-actions">
+        {email && (
+          <a class="primary-contact" href={email.href}>
+            <span class="action-label">EMAIL</span>
+            <strong>utkukesanli@gmail.com</strong>
+            <span class="action-arrow" aria-hidden="true">↗</span>
+          </a>
+        )}
+
+        <div class="external-grid">
+          {externalLinks.map((link) => (
+            <a href={link.href} target="_blank" rel="noreferrer">
+              <span>{link.shortLabel}</span>
+              <strong>{link.label}</strong>
+              <span aria-hidden="true">↗</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div>
+        <strong>Utku Keşanlı</strong>
+        <span>Flutter Developer · Mobile Product Designer</span>
+      </div>
+      <div class="footer-meta">
+        <span>İzmir, Türkiye</span>
+        <span>© 2026</span>
+        <a href="#home">Back to top ↑</a>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    padding: clamp(5rem, 9vw, 8rem) clamp(1.25rem, 5vw, 5rem) 2rem;
+    border-top: 1px solid var(--line);
+    scroll-margin-top: calc(var(--topbar-height) + 24px);
+  }
+
+  .contact-inner {
+    width: min(100%, var(--max-width));
+    margin: 0 auto;
+  }
+
+  .contact-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    min-height: 430px;
+    padding: clamp(1.6rem, 4vw, 3.5rem);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(circle at 80% 20%, var(--accent-soft), transparent 36%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.026), rgba(255, 255, 255, 0.008));
+  }
+
+  .contact-copy {
+    align-self: center;
+  }
+
+  .eyebrow {
+    margin: 0 0 1.4rem;
+    color: var(--accent);
+    font-size: 0.66rem;
+    font-weight: 750;
+    letter-spacing: 0.16em;
+  }
+
+  h3 {
+    margin: 0;
+    max-width: 12ch;
+    font-size: clamp(2.5rem, 5.4vw, 5.7rem);
+    line-height: 0.94;
+    letter-spacing: -0.06em;
+  }
+
+  .contact-copy > p:last-child {
+    margin: 1.7rem 0 0;
+    max-width: 58ch;
+    color: var(--text-muted);
+    font-size: 0.94rem;
+    line-height: 1.7;
+  }
+
+  .contact-actions {
+    align-self: center;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .primary-contact {
+    position: relative;
+    display: grid;
+    gap: 0.35rem;
+    padding: 1.5rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    background: rgba(10, 10, 10, 0.42);
+    transition: transform 220ms var(--ease-out), border-color 180ms ease, background 180ms ease;
+  }
+
+  .primary-contact:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+
+  .action-label {
+    color: var(--accent);
+    font-size: 0.62rem;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+  }
+
+  .primary-contact strong {
+    overflow-wrap: anywhere;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    letter-spacing: -0.025em;
+  }
+
+  .action-arrow {
+    position: absolute;
+    top: 1.4rem;
+    right: 1.4rem;
+    color: var(--accent);
+  }
+
+  .external-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .external-grid a {
+    min-height: 105px;
+    display: grid;
+    align-content: space-between;
+    grid-template-columns: 1fr auto;
+    gap: 0.8rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.01);
+    transition: color 180ms ease, border-color 180ms ease, transform 220ms var(--ease-out);
+  }
+
+  .external-grid a:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    color: var(--text);
+  }
+
+  .external-grid a > span:first-child {
+    color: var(--accent);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+
+  .external-grid strong {
+    grid-column: 1 / -1;
+    align-self: end;
+    font-size: 0.82rem;
+  }
+
+  .site-footer {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+  }
+
+  .site-footer > div:first-child {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .site-footer strong {
+    color: var(--text);
+    font-size: 0.82rem;
+  }
+
+  .footer-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.9rem 1.4rem;
+  }
+
+  .footer-meta a {
+    color: var(--text);
+  }
+
+  .footer-meta a:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 900px) {
+    .contact-card {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .contact-section {
+      padding: 4rem 0.625rem 1.5rem;
+    }
+
+    .site-footer {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .footer-meta {
+      justify-content: flex-start;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .external-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .external-grid a {
+      min-height: 86px;
+    }
+  }
+</style>
