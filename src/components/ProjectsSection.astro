@@ -4,14 +4,12 @@ import ProjectCard from './ProjectCard.astro';
 import { projects } from '../data/projects';
 ---
 
-<section class="projects-section" id="projects" aria-labelledby="projects-title">
+<section class="projects-section" id="projects" aria-label="Projects">
   <div class="projects-inner">
     <SectionHeading
-      number="03"
-      eyebrow="Selected projects"
+      index="03"
       title="Products I’ve designed and built."
       description="A mix of released work, collaborative product development and what I’m currently building."
-      titleId="projects-title"
     />
 
     <div class="projects-grid">
@@ -34,6 +32,7 @@ import { projects } from '../data/projects';
     position: relative;
     padding: clamp(5rem, 9vw, 9rem) clamp(1.25rem, 5vw, 5rem);
     border-top: 1px solid var(--line);
+    scroll-margin-top: calc(var(--topbar-height) + 24px);
   }
 
   .projects-inner {
