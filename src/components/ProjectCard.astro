@@ -15,22 +15,10 @@ const hasCarousel = images.length > 0;
 
 <article class="project-card" data-project={project.slug}>
   <div class="media-column">
-    <div class="media-topline">
-      <span class="project-index">{displayIndex}</span>
-
-      {project.icon ? (
-        <div class="project-icon">
-          <img src={project.icon} alt={`${project.title} app icon`} loading="lazy" />
-        </div>
-      ) : (
-        <div class="project-icon project-icon--fallback" aria-hidden="true">
-          {project.title.slice(0, 2).toUpperCase()}
-        </div>
-      )}
-    </div>
+    <span class="project-index">{displayIndex}</span>
 
     {hasCarousel ? (
-      <div class="project-carousel" data-project-carousel data-autoplay="true">
+      <div class="project-carousel" data-project-carousel>
         <div class="image-stack" aria-label={`${project.title} application screenshots`}>
           {images.map((image, imageIndex) => (
             <figure
@@ -78,27 +66,38 @@ const hasCarousel = images.length > 0;
 
   <div class="information-column">
     <header class="project-heading">
-      <div class="project-heading-copy">
-        <div class="project-kicker">
-          <span>{project.year}</span>
-          <span class:list={['project-status', { developing: project.status === 'In development' }]}>
-            {project.status}
-          </span>
+      {project.icon ? (
+        <div class="project-icon">
+          <img src={project.icon} alt={`${project.title} app icon`} loading="lazy" decoding="async" />
         </div>
-        <h3>{project.title}</h3>
-        <p>{project.subtitle}</p>
+      ) : (
+        <div class="project-icon project-icon--fallback" aria-hidden="true">
+          {project.title.slice(0, 2).toUpperCase()}
+        </div>
+      )}
+
+      <div class="project-kicker">
+        <span>{project.year}</span>
+        <span class:list={['project-status', { developing: project.status === 'In development' }]}>
+          {project.status}
+        </span>
       </div>
 
+      <h3>{project.title}</h3>
+      <p class="project-subtitle">{project.subtitle}</p>
+
       {project.href && (
-        <a
-          class="project-link"
-          href={project.href}
-          target={external ? '_blank' : undefined}
-          rel={external ? 'noreferrer' : undefined}
-        >
-          <span>{project.linkLabel ?? 'View project'}</span>
-          <span aria-hidden="true">↗</span>
-        </a>
+        <div class="project-link-row">
+          <a
+            class="project-link"
+            href={project.href}
+            target={external ? '_blank' : undefined}
+            rel={external ? 'noreferrer' : undefined}
+          >
+            <span>{project.linkLabel ?? 'View project'}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       )}
     </header>
 
@@ -172,7 +171,7 @@ const hasCarousel = images.length > 0;
       const start = () => {
         stop();
         if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        timer = window.setInterval(() => move(1), 3800);
+        timer = window.setInterval(() => move(1), 4200);
       };
 
       carousel.addEventListener('mouseenter', () => {
@@ -212,9 +211,9 @@ const hasCarousel = images.length > 0;
     --project-accent: var(--accent);
     --project-accent-soft: var(--accent-soft);
     display: grid;
-    grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.45fr);
+    grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.4fr);
     gap: clamp(2rem, 5vw, 5rem);
-    min-height: 610px;
+    min-height: 640px;
     padding: clamp(1.5rem, 3vw, 3rem);
     overflow: hidden;
     border: 1px solid var(--line-strong);
@@ -248,44 +247,12 @@ const hasCarousel = images.length > 0;
     border-right: 1px solid var(--line);
   }
 
-  .media-topline {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 1rem;
-    min-height: 92px;
-  }
-
   .project-index {
+    position: relative;
+    z-index: 6;
     color: var(--project-accent);
     font-size: 0.72rem;
     letter-spacing: 0.16em;
-  }
-
-  .project-icon {
-    display: grid;
-    place-items: center;
-    width: 74px;
-    height: 74px;
-    overflow: hidden;
-    border: 1px solid var(--line-strong);
-    border-radius: 18px;
-    background: #111;
-    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.2);
-  }
-
-  .project-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .project-icon--fallback {
-    color: var(--project-accent);
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    background: var(--project-accent-soft);
   }
 
   .project-carousel {
@@ -293,14 +260,14 @@ const hasCarousel = images.length > 0;
     display: grid;
     place-items: center;
     flex: 1;
-    min-height: 450px;
+    min-height: 520px;
     outline: none;
   }
 
   .image-stack {
     position: relative;
-    width: min(72%, 235px);
-    aspect-ratio: 0.49;
+    width: min(78%, 280px);
+    aspect-ratio: 1284 / 2778;
   }
 
   .project-slide {
@@ -310,7 +277,7 @@ const hasCarousel = images.length > 0;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: 24px;
-    background: #111;
+    background: #0b0b0b;
     opacity: 0;
     transform: translate3d(0, 0, 0) scale(0.88);
     transition:
@@ -324,7 +291,8 @@ const hasCarousel = images.length > 0;
   .project-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    image-rendering: auto;
   }
 
   .project-slide.is-active {
@@ -337,16 +305,16 @@ const hasCarousel = images.length > 0;
 
   .project-slide.is-previous {
     z-index: 1;
-    opacity: 0.42;
-    transform: translate3d(-24%, 6%, 0) rotate(-5deg) scale(0.9);
-    filter: saturate(0.65) brightness(0.72);
+    opacity: 0.4;
+    transform: translate3d(-22%, 6%, 0) rotate(-5deg) scale(0.91);
+    filter: saturate(0.68) brightness(0.75);
   }
 
   .project-slide.is-next {
     z-index: 2;
-    opacity: 0.52;
-    transform: translate3d(24%, 3%, 0) rotate(5deg) scale(0.92);
-    filter: saturate(0.72) brightness(0.8);
+    opacity: 0.5;
+    transform: translate3d(22%, 3%, 0) rotate(5deg) scale(0.93);
+    filter: saturate(0.74) brightness(0.82);
   }
 
   .carousel-button {
@@ -360,7 +328,7 @@ const hasCarousel = images.length > 0;
     padding: 0;
     border: 1px solid var(--line-strong);
     border-radius: 50%;
-    background: rgba(10,10,10,0.86);
+    background: rgba(10,10,10,0.9);
     color: var(--text);
     font: inherit;
     opacity: 0;
@@ -386,7 +354,7 @@ const hasCarousel = images.length > 0;
 
   .carousel-dots {
     position: absolute;
-    bottom: 0.2rem;
+    bottom: 0.1rem;
     display: flex;
     gap: 0.45rem;
   }
@@ -411,7 +379,7 @@ const hasCarousel = images.length > 0;
     display: grid;
     place-items: center;
     flex: 1;
-    min-height: 420px;
+    min-height: 480px;
     isolation: isolate;
   }
 
@@ -471,19 +439,43 @@ const hasCarousel = images.length > 0;
   .information-column {
     display: grid;
     grid-template-rows: auto 1fr;
+    align-content: start;
     gap: clamp(2rem, 4vw, 3rem);
     min-width: 0;
   }
 
   .project-heading {
     display: grid;
-    gap: 1.2rem;
+    justify-items: center;
+    gap: 0.75rem;
     text-align: center;
   }
 
-  .project-heading-copy {
+  .project-icon {
     display: grid;
-    justify-items: center;
+    place-items: center;
+    width: 82px;
+    height: 82px;
+    margin-bottom: 0.35rem;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    border-radius: 20px;
+    background: #111;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.24);
+  }
+
+  .project-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project-icon--fallback {
+    color: var(--project-accent);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    background: var(--project-accent-soft);
   }
 
   .project-kicker {
@@ -492,57 +484,57 @@ const hasCarousel = images.length > 0;
     justify-content: center;
     flex-wrap: wrap;
     gap: 0.6rem;
-    margin-bottom: 0.75rem;
-    color: var(--text-muted);
-    font-size: 0.68rem;
+    color: rgba(244, 242, 237, 0.68);
+    font-size: 0.69rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
   .project-status {
-    padding: 0.35rem 0.55rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
+    color: rgba(244, 242, 237, 0.78);
   }
 
   .project-status.developing {
-    border-color: color-mix(in srgb, var(--project-accent) 55%, transparent);
     color: var(--project-accent);
-    background: var(--project-accent-soft);
   }
 
   h3 {
-    margin: 0;
-    font-size: clamp(2.6rem, 5vw, 5rem);
+    margin: 0.2rem 0 0;
+    font-size: clamp(2.7rem, 5vw, 5rem);
     line-height: 0.9;
     letter-spacing: -0.06em;
   }
 
-  .project-heading-copy > p {
-    margin: 0.8rem 0 0;
+  .project-subtitle {
+    margin: 0.1rem 0 0;
     max-width: 620px;
-    color: var(--text-muted);
-    font-size: 0.9rem;
+    color: rgba(244, 242, 237, 0.74);
+    font-size: 0.92rem;
     line-height: 1.5;
   }
 
-  .project-link {
+  .project-link-row {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
-    padding: 0.8rem 1rem;
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius-sm);
-    color: var(--text-muted);
-    font-size: 0.78rem;
-    transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+    margin-top: 0.45rem;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.15rem 0;
+    color: var(--project-accent);
+    font-size: 0.82rem;
+    font-weight: 650;
+    transition: color 180ms ease, transform 180ms ease;
   }
 
   .project-link:hover {
     color: var(--text);
-    border-color: var(--project-accent);
-    background: var(--project-accent-soft);
+    transform: translateY(-1px);
   }
 
   .description-box {
@@ -557,8 +549,8 @@ const hasCarousel = images.length > 0;
 
   .project-description {
     margin: 0;
-    color: var(--text-muted);
-    font-size: clamp(0.96rem, 1.4vw, 1.08rem);
+    color: rgba(244, 242, 237, 0.88);
+    font-size: clamp(0.98rem, 1.4vw, 1.1rem);
     line-height: 1.72;
   }
 
@@ -574,7 +566,7 @@ const hasCarousel = images.length > 0;
     position: relative;
     padding-left: 1.15rem;
     color: var(--text);
-    font-size: 0.86rem;
+    font-size: 0.88rem;
     line-height: 1.55;
   }
 
@@ -599,7 +591,7 @@ const hasCarousel = images.length > 0;
     padding: 0.42rem 0.62rem;
     border: 1px solid var(--line);
     border-radius: 999px;
-    color: var(--text-muted);
+    color: rgba(244, 242, 237, 0.7);
     font-size: 0.68rem;
   }
 
@@ -614,7 +606,7 @@ const hasCarousel = images.length > 0;
     }
 
     .media-column {
-      min-height: 540px;
+      min-height: 590px;
       padding-right: 0;
       padding-bottom: 2rem;
       border-right: 0;
@@ -622,7 +614,7 @@ const hasCarousel = images.length > 0;
     }
 
     .image-stack {
-      width: min(56%, 230px);
+      width: min(62%, 270px);
     }
   }
 
@@ -632,21 +624,21 @@ const hasCarousel = images.length > 0;
     }
 
     .media-column {
-      min-height: 470px;
+      min-height: 500px;
     }
 
     .project-icon {
-      width: 62px;
-      height: 62px;
-      border-radius: 15px;
+      width: 68px;
+      height: 68px;
+      border-radius: 16px;
     }
 
     .project-carousel {
-      min-height: 370px;
+      min-height: 410px;
     }
 
     .image-stack {
-      width: min(62%, 190px);
+      width: min(66%, 210px);
     }
 
     .carousel-button {
