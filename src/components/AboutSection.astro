@@ -1,0 +1,272 @@
+---
+import SectionHeading from './SectionHeading.astro';
+
+const principles = [
+  {
+    index: '01',
+    title: 'Engineering with product context',
+    text: 'I do not treat the interface, backend and release process as separate problems. I like understanding the complete product flow and making technical decisions around the experience the user should actually have.',
+  },
+  {
+    index: '02',
+    title: 'Design that survives implementation',
+    text: 'My UI work starts in Figma but is shaped by real mobile constraints: reusable components, responsive layouts, loading and error states, localization, accessibility and maintainable Flutter code.',
+  },
+  {
+    index: '03',
+    title: 'From prototype to production',
+    text: 'I am most comfortable when I can follow a product beyond the first screen — connecting cloud services, securing workflows, integrating payments and taking the final build through store release.',
+  },
+];
+---
+
+<section class="about-section" id="about" aria-labelledby="about-title">
+  <div class="about-inner">
+    <SectionHeading
+      index="02"
+      title="About"
+      description="A mobile developer with a product-design mindset, focused on turning ideas into software people can actually use."
+    />
+
+    <div class="about-layout">
+      <div class="about-statement">
+        <p class="eyebrow">DEVELOPER · DESIGNER · PRODUCT BUILDER</p>
+        <h3>
+          I build mobile products across the whole path from
+          <span>first interface to production release.</span>
+        </h3>
+        <p class="body-copy">
+          I am a Computer Engineering graduate based in İzmir, working primarily with Flutter and Dart.
+          My projects combine mobile engineering with Firebase-backed systems, AI and REST integrations,
+          subscriptions, localization and product-focused UI/UX. I enjoy owning enough of the product to
+          understand why a feature exists — not only how to code it.
+        </p>
+      </div>
+
+      <aside class="about-facts" aria-label="Profile highlights">
+        <div class="fact">
+          <span>EDUCATION</span>
+          <strong>B.Sc. Computer Engineering</strong>
+          <small>İzmir Bakırçay University · 2024</small>
+        </div>
+        <div class="fact">
+          <span>FOCUS</span>
+          <strong>Flutter · Mobile UI · Product</strong>
+          <small>iOS & Android product development</small>
+        </div>
+        <div class="fact">
+          <span>DELIVERY</span>
+          <strong>Design → Build → Ship</strong>
+          <small>Figma, Firebase, stores & production workflows</small>
+        </div>
+        <div class="fact">
+          <span>LANGUAGES</span>
+          <strong>Turkish · English</strong>
+          <small>Native · B2</small>
+        </div>
+      </aside>
+    </div>
+
+    <div class="principles-grid">
+      {principles.map((principle) => (
+        <article class="principle-card">
+          <span>{principle.index}</span>
+          <h4>{principle.title}</h4>
+          <p>{principle.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    position: relative;
+    padding: clamp(5rem, 9vw, 8rem) clamp(1.25rem, 5vw, 5rem);
+    border-top: 1px solid var(--line);
+    scroll-margin-top: calc(var(--topbar-height) + 24px);
+  }
+
+  .about-inner {
+    width: min(100%, var(--max-width));
+    margin: 0 auto;
+  }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+    gap: clamp(1rem, 3vw, 2rem);
+    align-items: stretch;
+  }
+
+  .about-statement,
+  .about-facts,
+  .principle-card {
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.014);
+  }
+
+  .about-statement {
+    min-height: 390px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(1.6rem, 4vw, 3.5rem);
+    background:
+      radial-gradient(circle at 12% 15%, var(--accent-soft), transparent 34%),
+      rgba(255, 255, 255, 0.014);
+  }
+
+  .eyebrow {
+    margin: 0 0 1.5rem;
+    color: var(--accent);
+    font-size: 0.66rem;
+    font-weight: 750;
+    letter-spacing: 0.15em;
+  }
+
+  h3 {
+    margin: 0;
+    max-width: 16ch;
+    font-size: clamp(2.15rem, 4.5vw, 4.7rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+  }
+
+  h3 span {
+    color: var(--text-muted);
+  }
+
+  .body-copy {
+    margin: 2rem 0 0;
+    max-width: 68ch;
+    color: rgba(244, 242, 237, 0.76);
+    font-size: clamp(0.92rem, 1.2vw, 1.04rem);
+    line-height: 1.75;
+  }
+
+  .about-facts {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    overflow: hidden;
+  }
+
+  .fact {
+    display: grid;
+    align-content: center;
+    gap: 0.35rem;
+    padding: 1.35rem 1.5rem;
+  }
+
+  .fact + .fact {
+    border-top: 1px solid var(--line);
+  }
+
+  .fact > span {
+    color: var(--accent);
+    font-size: 0.62rem;
+    font-weight: 750;
+    letter-spacing: 0.13em;
+  }
+
+  .fact strong {
+    font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+    letter-spacing: -0.02em;
+  }
+
+  .fact small {
+    color: var(--text-muted);
+    font-size: 0.76rem;
+    line-height: 1.45;
+  }
+
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .principle-card {
+    min-height: 230px;
+    padding: clamp(1.3rem, 2.4vw, 1.9rem);
+    transition: transform 220ms var(--ease-out), border-color 180ms ease, background 180ms ease;
+  }
+
+  .principle-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(143, 124, 255, 0.45);
+    background: var(--surface);
+  }
+
+  .principle-card > span {
+    color: var(--accent);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+  }
+
+  h4 {
+    margin: 2.2rem 0 0.8rem;
+    font-size: clamp(1.15rem, 2vw, 1.55rem);
+    letter-spacing: -0.035em;
+  }
+
+  .principle-card p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.86rem;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 900px) {
+    .about-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .about-facts {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: none;
+    }
+
+    .fact + .fact {
+      border-top: 0;
+    }
+
+    .fact:nth-child(even) {
+      border-left: 1px solid var(--line);
+    }
+
+    .fact:nth-child(n + 3) {
+      border-top: 1px solid var(--line);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .about-section {
+      padding: 4rem 0.625rem;
+    }
+
+    .principles-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .principle-card {
+      min-height: auto;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .about-facts {
+      grid-template-columns: 1fr;
+    }
+
+    .fact:nth-child(even) {
+      border-left: 0;
+    }
+
+    .fact + .fact {
+      border-top: 1px solid var(--line);
+    }
+  }
+</style>
