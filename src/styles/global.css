@@ -70,6 +70,29 @@ main {
   border-top: 1px solid var(--line);
 }
 
+/* Project identity header: keep icon and title block side-by-side with breathing room. */
+body .project-card .project-identity-row {
+  gap: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+body .project-card .project-icon {
+  width: 104px;
+  height: 104px;
+  border-radius: 24px;
+}
+
+@media (max-width: 560px) {
+  body .project-card .project-identity-row {
+    gap: 1.35rem;
+  }
+
+  body .project-card .project-icon {
+    width: 82px;
+    height: 82px;
+    border-radius: 19px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
