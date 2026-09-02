@@ -9,49 +9,81 @@ type Props = {
 const { title, details } = Astro.props;
 ---
 
-<details class="project-details">
-  <summary>
+<div class="project-details" data-project-details>
+  <button
+    class="details-toggle"
+    type="button"
+    aria-expanded="false"
+    data-details-toggle
+  >
     <span class="summary-copy">
       <span class="label-closed">Show more</span>
       <span class="label-open">Show less</span>
       <small>Full {title} project notes</small>
     </span>
     <span class="summary-icon" aria-hidden="true">+</span>
-  </summary>
+  </button>
 
-  <div class="details-grid">
-    {details.map((detail) => (
-      <section>
-        <h4>{detail.title}</h4>
-        <p>{detail.text}</p>
-      </section>
-    ))}
+  <div class="details-expansion" data-details-expansion>
+    <div class="details-expansion-inner">
+      <div class="details-grid">
+        {details.map((detail) => (
+          <section>
+            <h4>{detail.title}</h4>
+            <p>{detail.text}</p>
+          </section>
+        ))}
+      </div>
+    </div>
   </div>
-</details>
+</div>
+
+<script>
+  const initialiseProjectDetails = () => {
+    document.querySelectorAll<HTMLElement>('[data-project-details]').forEach((details) => {
+      if (details.dataset.initialised === 'true') return;
+      details.dataset.initialised = 'true';
+
+      const toggle = details.querySelector<HTMLButtonElement>('[data-details-toggle]');
+      if (!toggle) return;
+
+      toggle.addEventListener('click', () => {
+        const isOpen = details.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+
+        const projectCard = details.closest<HTMLElement>('.project-card');
+        projectCard?.classList.toggle('has-open-details', isOpen);
+      });
+    });
+  };
+
+  initialiseProjectDetails();
+  document.addEventListener('astro:page-load', initialiseProjectDetails);
+</script>
 
 <style>
   .project-details {
     width: 100%;
+    overflow: hidden;
     border: 1px solid var(--line-strong);
     border-radius: var(--radius-md);
     background: rgba(255, 255, 255, 0.012);
-    overflow: hidden;
   }
 
-  summary {
+  .details-toggle {
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
     min-height: 72px;
     padding: 1rem 1.25rem;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
     cursor: pointer;
-    list-style: none;
     user-select: none;
-  }
-
-  summary::-webkit-details-marker {
-    display: none;
   }
 
   .summary-copy {
@@ -83,27 +115,50 @@ const { title, details } = Astro.props;
     place-items: center;
     width: 30px;
     height: 30px;
+    flex: 0 0 auto;
     border: 1px solid var(--line-strong);
     border-radius: 50%;
     color: var(--project-accent);
     font-size: 1.15rem;
-    transition: transform 260ms var(--ease-out), border-color 180ms ease;
+    transition:
+      transform 520ms var(--ease-out),
+      border-color 180ms ease;
   }
 
-  summary:hover .summary-icon {
+  .details-toggle:hover .summary-icon,
+  .details-toggle:focus-visible .summary-icon {
     border-color: var(--project-accent);
   }
 
-  .project-details[open] .label-closed {
+  .details-toggle:focus-visible {
+    outline: 1px solid var(--project-accent);
+    outline-offset: -1px;
+  }
+
+  .project-details.is-open .label-closed {
     display: none;
   }
 
-  .project-details[open] .label-open {
+  .project-details.is-open .label-open {
     display: inline;
   }
 
-  .project-details[open] .summary-icon {
+  .project-details.is-open .summary-icon {
     transform: rotate(45deg);
+  }
+
+  .details-expansion {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows 620ms var(--ease-out),
+      opacity 360ms ease;
+  }
+
+  .details-expansion-inner {
+    min-height: 0;
+    overflow: hidden;
   }
 
   .details-grid {
@@ -112,6 +167,17 @@ const { title, details } = Astro.props;
     gap: 1px;
     border-top: 1px solid var(--line);
     background: var(--line);
+    transform: translateY(-18px);
+    transition: transform 620ms var(--ease-out);
+  }
+
+  .project-details.is-open .details-expansion {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .project-details.is-open .details-grid {
+    transform: translateY(0);
   }
 
   section {
@@ -140,8 +206,16 @@ const { title, details } = Astro.props;
       grid-template-columns: 1fr;
     }
 
-    summary {
+    .details-toggle {
       min-height: 66px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .details-expansion,
+    .details-grid,
+    .summary-icon {
+      transition: none;
     }
   }
 </style>
