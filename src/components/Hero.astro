@@ -3,22 +3,25 @@ import ProfilePanel from './ProfilePanel.astro';
 
 const capabilities = [
   {
-    index: '01',
     title: 'Design',
     description: 'Product flows, mobile UI/UX, reusable systems and Figma prototypes designed with implementation in mind.',
     stack: 'Figma · UI/UX · Product',
+    project: 'focial',
+    tone: 'red',
   },
   {
-    index: '02',
     title: 'Build',
     description: 'Cross-platform mobile applications with responsive interfaces, real application states and maintainable Flutter architecture.',
     stack: 'Flutter · Dart · Firebase',
+    project: 'evender',
+    tone: 'green',
   },
   {
-    index: '03',
     title: 'Ship',
     description: 'Cloud-backed workflows, AI and REST integrations, subscriptions, localization, security and production store releases.',
     stack: 'Cloud · APIs · IAP · Stores',
+    project: 'talevd',
+    tone: 'blue',
   },
 ];
 ---
@@ -43,9 +46,14 @@ const capabilities = [
 
       <div class="capability-grid">
         {capabilities.map((capability) => (
-          <article class="capability-card">
+          <a
+            class="capability-card"
+            href="#projects"
+            data-project-target={capability.project}
+            data-tone={capability.tone}
+            aria-label={`${capability.title} — view related project`}
+          >
             <div class="capability-top">
-              <span>{capability.index}</span>
               <span aria-hidden="true">↘</span>
             </div>
             <div>
@@ -53,7 +61,7 @@ const capabilities = [
               <p>{capability.description}</p>
             </div>
             <small>{capability.stack}</small>
-          </article>
+          </a>
         ))}
       </div>
 
@@ -106,6 +114,30 @@ const capabilities = [
       if (!frame) frame = requestAnimationFrame(render);
     }, { passive: true });
   }
+
+  const initialiseCapabilityLinks = () => {
+    document.querySelectorAll<HTMLAnchorElement>('[data-project-target]').forEach((link) => {
+      if (link.dataset.initialised === 'true') return;
+      link.dataset.initialised = 'true';
+
+      link.addEventListener('click', (event) => {
+        const slug = link.dataset.projectTarget;
+        if (!slug) return;
+
+        const target = document.querySelector<HTMLElement>(`.project-card[data-project="${slug}"]`);
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          block: 'start',
+        });
+      });
+    });
+  };
+
+  initialiseCapabilityLinks();
+  document.addEventListener('astro:page-load', initialiseCapabilityLinks);
 </script>
 
 <style>
@@ -204,6 +236,8 @@ const capabilities = [
   }
 
   .capability-card {
+    --capability-accent: var(--accent);
+    --capability-soft: var(--accent-soft);
     min-width: 0;
     display: flex;
     flex-direction: column;
@@ -212,24 +246,49 @@ const capabilities = [
     padding: clamp(1.2rem, 2vw, 1.6rem);
     border: 1px solid var(--line-strong);
     border-radius: var(--radius-lg);
+    color: inherit;
     background:
       linear-gradient(180deg, rgba(255,255,255,0.02), transparent 45%),
       var(--surface);
-    transition: transform 220ms var(--ease-out), border-color 180ms ease, background 180ms ease;
+    cursor: pointer;
+    transition:
+      transform 220ms var(--ease-out),
+      border-color 220ms ease,
+      background 260ms ease,
+      box-shadow 260ms ease;
   }
 
-  .capability-card:hover {
+  .capability-card[data-tone='red'] {
+    --capability-accent: #ff4c45;
+    --capability-soft: rgba(255, 76, 69, 0.14);
+  }
+
+  .capability-card[data-tone='green'] {
+    --capability-accent: #59d7be;
+    --capability-soft: rgba(89, 215, 190, 0.14);
+  }
+
+  .capability-card[data-tone='blue'] {
+    --capability-accent: #6f86ff;
+    --capability-soft: rgba(95, 122, 255, 0.16);
+  }
+
+  .capability-card:hover,
+  .capability-card:focus-visible {
     transform: translateY(-4px);
-    border-color: rgba(143, 124, 255, 0.48);
-    background: var(--surface-soft);
+    border-color: var(--capability-accent);
+    background:
+      radial-gradient(circle at 28% 18%, var(--capability-soft), transparent 58%),
+      var(--surface);
+    box-shadow: 0 20px 52px rgba(0, 0, 0, 0.22);
+    outline: none;
   }
 
   .capability-top {
     display: flex;
-    justify-content: space-between;
-    color: var(--accent);
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
+    justify-content: flex-end;
+    color: var(--capability-accent);
+    font-size: 0.75rem;
   }
 
   .capability-card h3 {
