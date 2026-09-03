@@ -35,12 +35,11 @@ const capabilities = [
     <div class="work-column">
       <header class="work-intro">
         <div>
-          <p class="kicker">MOBILE ENGINEERING + PRODUCT DESIGN</p>
-          <h2>From Figma to the App Store.</h2>
+          <p class="kicker">FLUTTER · PRODUCT DESIGN · RELEASE</p>
+          <h2>Mobile products, end to end.</h2>
         </div>
         <p>
-          I work across the parts that turn a mobile idea into a real product — interface design,
-          application development, cloud integrations and the final release workflow.
+          I design the interface, build the application, connect the product systems and carry the final experience through release.
         </p>
       </header>
 
@@ -64,14 +63,6 @@ const capabilities = [
           </a>
         ))}
       </div>
-
-      <a class="projects-gateway" href="#projects">
-        <span>
-          <small>SELECTED WORK</small>
-          <strong>See the products behind the stack.</strong>
-        </span>
-        <span class="gateway-arrow" aria-hidden="true">↓</span>
-      </a>
     </div>
   </div>
 
@@ -188,24 +179,42 @@ const capabilities = [
   .work-column {
     min-width: 0;
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr;
     gap: clamp(0.75rem, 1.6vw, 1.25rem);
   }
 
   .work-intro {
+    --intro-accent: #f29b52;
+    --intro-soft: rgba(242, 155, 82, 0.14);
     display: grid;
     grid-template-columns: minmax(260px, 0.95fr) minmax(240px, 1.05fr);
-    gap: 2rem;
+    gap: clamp(2rem, 5vw, 4.5rem);
     align-items: end;
-    padding: clamp(1.2rem, 2.3vw, 1.8rem);
+    padding: clamp(1.3rem, 2.6vw, 2rem);
     border: 1px solid var(--line-strong);
     border-radius: var(--radius-lg);
-    background: rgba(17, 17, 17, 0.82);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.02), transparent 46%),
+      var(--surface);
+    transition:
+      transform 220ms var(--ease-out),
+      border-color 220ms ease,
+      background 260ms ease,
+      box-shadow 260ms ease;
+  }
+
+  .work-intro:hover {
+    transform: translateY(-4px);
+    border-color: var(--intro-accent);
+    background:
+      radial-gradient(circle at 22% 18%, var(--intro-soft), transparent 58%),
+      var(--surface);
+    box-shadow: 0 20px 52px rgba(0, 0, 0, 0.22);
   }
 
   .kicker {
-    margin: 0 0 0.55rem;
-    color: var(--accent);
+    margin: 0 0 0.65rem;
+    color: var(--intro-accent);
     font-size: 0.62rem;
     font-weight: 800;
     letter-spacing: 0.18em;
@@ -214,18 +223,18 @@ const capabilities = [
   .work-intro h2 {
     margin: 0;
     max-width: 12ch;
-    font-size: clamp(1.8rem, 3.7vw, 4rem);
+    font-size: clamp(1.9rem, 3.7vw, 4rem);
     line-height: 0.94;
     letter-spacing: -0.055em;
   }
 
   .work-intro > p {
     margin: 0;
-    max-width: 38rem;
+    max-width: 36rem;
     justify-self: end;
     color: var(--text-muted);
-    font-size: clamp(0.8rem, 1.05vw, 0.94rem);
-    line-height: 1.65;
+    font-size: clamp(0.82rem, 1.05vw, 0.96rem);
+    line-height: 1.7;
   }
 
   .capability-grid {
@@ -312,55 +321,6 @@ const capabilities = [
     line-height: 1.5;
   }
 
-  .projects-gateway {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem 1.25rem;
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius-lg);
-    background: rgba(17, 17, 17, 0.76);
-    transition: border-color 180ms ease, background 180ms ease;
-  }
-
-  .projects-gateway:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-  }
-
-  .projects-gateway > span:first-child {
-    display: grid;
-    gap: 0.2rem;
-  }
-
-  .projects-gateway small {
-    color: var(--accent);
-    font-size: 0.58rem;
-    font-weight: 750;
-    letter-spacing: 0.14em;
-  }
-
-  .projects-gateway strong {
-    font-size: clamp(0.9rem, 1.3vw, 1.05rem);
-  }
-
-  .gateway-arrow {
-    display: grid;
-    place-items: center;
-    width: 38px;
-    height: 38px;
-    border: 1px solid var(--line-strong);
-    border-radius: 50%;
-    color: var(--accent);
-    transition: transform 220ms var(--ease-out), border-color 180ms ease;
-  }
-
-  .projects-gateway:hover .gateway-arrow {
-    transform: translateY(3px);
-    border-color: var(--accent);
-  }
-
   .scroll-cue {
     position: absolute;
     right: max(1rem, calc((100% - var(--max-width)) / 2));
@@ -398,6 +358,7 @@ const capabilities = [
     .work-intro {
       grid-template-columns: 1fr;
       align-items: start;
+      gap: 1.35rem;
     }
 
     .work-intro > p {
