@@ -70,6 +70,64 @@ main {
   border-top: 1px solid var(--line);
 }
 
+/* Decorative numbering is intentionally hidden across the portfolio. */
+body .section-heading {
+  grid-template-columns: 1fr;
+}
+
+body .section-heading .label-row,
+body .project-card .project-index,
+body .experience-card .card-index,
+body .skill-card .index,
+body .principle-card > span {
+  display: none;
+}
+
+body .principle-card h4 {
+  margin-top: 0;
+}
+
+body .skill-card .card-head {
+  gap: 0;
+}
+
+/* Project-specific hover states. */
+body .project-card {
+  scroll-margin-top: calc(var(--topbar-height) + 32px);
+  transition:
+    transform 260ms var(--ease-out),
+    border-color 220ms ease,
+    background 280ms ease,
+    box-shadow 280ms ease;
+}
+
+body .project-card[data-project='talevd']:hover {
+  transform: translateY(-3px);
+  border-color: rgba(95, 122, 255, 0.58);
+  background:
+    radial-gradient(circle at 20% 45%, rgba(95, 122, 255, 0.22), transparent 48%),
+    linear-gradient(145deg, rgba(95, 122, 255, 0.055), rgba(255, 255, 255, 0.008));
+  box-shadow: 0 24px 70px rgba(42, 64, 145, 0.12);
+}
+
+body .project-card[data-project='focial']:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 76, 69, 0.58);
+  background:
+    radial-gradient(circle at 20% 45%, rgba(255, 76, 69, 0.19), transparent 48%),
+    linear-gradient(145deg, rgba(255, 76, 69, 0.05), rgba(255, 255, 255, 0.008));
+  box-shadow: 0 24px 70px rgba(135, 38, 34, 0.11);
+}
+
+body .project-card[data-project='evender']:hover {
+  transform: translateY(-3px);
+  border-color: rgba(89, 215, 190, 0.58);
+  background:
+    radial-gradient(circle at 20% 45%, rgba(89, 215, 190, 0.18), transparent 48%),
+    linear-gradient(145deg, rgba(89, 215, 190, 0.045), rgba(255, 255, 255, 0.008));
+  box-shadow: 0 24px 70px rgba(34, 112, 97, 0.1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
