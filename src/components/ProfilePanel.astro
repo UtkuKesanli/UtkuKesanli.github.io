@@ -19,6 +19,8 @@
 
 <style>
   .profile-panel {
+    --profile-accent: #f0c95a;
+    --profile-soft: rgba(240, 201, 90, 0.14);
     min-height: 100%;
     display: flex;
     flex-direction: column;
@@ -30,6 +32,20 @@
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 38%),
       var(--surface);
+    transition:
+      transform 220ms var(--ease-out),
+      border-color 220ms ease,
+      background 260ms ease,
+      box-shadow 260ms ease;
+  }
+
+  .profile-panel:hover {
+    transform: translateY(-4px);
+    border-color: var(--profile-accent);
+    background:
+      radial-gradient(circle at 22% 16%, var(--profile-soft), transparent 58%),
+      var(--surface);
+    box-shadow: 0 20px 52px rgba(0, 0, 0, 0.22);
   }
 
   .profile-mark {
@@ -39,15 +55,21 @@
     place-items: center;
     border: 1px solid var(--line-strong);
     border-radius: 50%;
-    color: var(--accent);
+    color: var(--profile-accent);
     font-size: 0.72rem;
     font-weight: 800;
     letter-spacing: 0.08em;
+    transition: border-color 220ms ease, background 220ms ease;
+  }
+
+  .profile-panel:hover .profile-mark {
+    border-color: var(--profile-accent);
+    background: var(--profile-soft);
   }
 
   .kicker {
     margin: 0 0 0.7rem;
-    color: var(--accent);
+    color: var(--profile-accent);
     font-size: 0.65rem;
     font-weight: 700;
     letter-spacing: 0.18em;
@@ -90,7 +112,7 @@
   }
 
   .meta a:hover {
-    color: var(--accent);
+    color: var(--profile-accent);
   }
 
   @media (max-width: 900px) {
