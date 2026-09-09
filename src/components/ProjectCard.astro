@@ -27,8 +27,11 @@ const hasCarousel = images.length > 0;
               data-slide-index={imageIndex}
             >
               <img
-                src={image}
-                alt={`${project.title} application screen ${imageIndex + 1}`}
+                src={imageIndex === 0 ? image.src : undefined}
+                data-src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
                 loading="lazy"
                 decoding="async"
               />
@@ -80,7 +83,14 @@ const hasCarousel = images.length > 0;
       <div class="project-identity-row">
         {project.icon ? (
           <div class="project-icon">
-            <img src={project.icon} alt={`${project.title} app icon`} loading="lazy" decoding="async" />
+            <img
+              src={project.icon}
+              alt={`${project.title} app icon`}
+              width="400"
+              height="400"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         ) : (
           <div class="project-icon project-icon--fallback" aria-hidden="true">
@@ -136,8 +146,20 @@ const hasCarousel = images.length > 0;
       let activeIndex = 0;
       let timer: number | undefined;
       let paused = false;
+      let inViewport = false;
+
+      const loadSlide = (slide?: HTMLElement) => {
+        const image = slide?.querySelector<HTMLImageElement>('img[data-src]');
+        if (!image || image.getAttribute('src')) return;
+
+        const source = image.dataset.src;
+        if (source) image.src = source;
+      };
 
       const render = () => {
+        const previousIndex = (activeIndex - 1 + slides.length) % slides.length;
+        const nextIndex = (activeIndex + 1) % slides.length;
+
         slides.forEach((slide, slideIndex) => {
           slide.classList.remove('is-active', 'is-previous', 'is-next');
 
@@ -151,12 +173,13 @@ const hasCarousel = images.length > 0;
             return;
           }
 
-          const previousIndex = (activeIndex - 1 + slides.length) % slides.length;
-          const nextIndex = (activeIndex + 1) % slides.length;
-
           if (slideIndex === previousIndex) slide.classList.add('is-previous');
           if (slideIndex === nextIndex) slide.classList.add('is-next');
         });
+
+        loadSlide(slides[activeIndex]);
+        loadSlide(slides[previousIndex]);
+        loadSlide(slides[nextIndex]);
 
         dots.forEach((dot, dotIndex) => {
           dot.classList.toggle('is-active', dotIndex === activeIndex);
@@ -175,7 +198,7 @@ const hasCarousel = images.length > 0;
 
       const start = () => {
         stop();
-        if (paused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (paused || !inViewport || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         timer = window.setInterval(() => move(1), 4200);
       };
 
@@ -203,7 +226,17 @@ const hasCarousel = images.length > 0;
       nextButton?.addEventListener('click', () => move(1));
 
       render();
-      start();
+
+      const visibilityObserver = new IntersectionObserver(
+        ([entry]) => {
+          inViewport = entry?.isIntersecting ?? false;
+          if (inViewport) start();
+          else stop();
+        },
+        { rootMargin: '160px 0px' },
+      );
+
+      visibilityObserver.observe(carousel);
     });
   };
 

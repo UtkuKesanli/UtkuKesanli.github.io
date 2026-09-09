@@ -1,3 +1,7 @@
+---
+const resumeHref = '/Utku_Baran_Kesanli_Resume.pdf';
+---
+
 <aside class="profile-panel" aria-label="Profile summary">
   <div class="profile-mark" aria-hidden="true">UK</div>
 
@@ -9,6 +13,16 @@
       I design and build mobile products from first idea to release, combining
       Flutter engineering, Firebase and product-focused UI/UX.
     </p>
+    <a
+      class="resume-link"
+      href={resumeHref}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="View Utku Keşanlı's résumé PDF"
+    >
+      <span>View Résumé</span>
+      <span aria-hidden="true">↗</span>
+    </a>
   </div>
 
   <div class="meta">
@@ -96,6 +110,39 @@
     color: var(--text-muted);
     font-size: 0.92rem;
     line-height: 1.7;
+  }
+
+  .resume-link {
+    width: max-content;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    margin-top: 1.35rem;
+    padding: 0.72rem 1rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    color: var(--text);
+    background: rgba(240, 201, 90, 0.06);
+    font-size: 0.78rem;
+    font-weight: 750;
+    letter-spacing: 0.015em;
+    transition:
+      transform 180ms var(--ease-out),
+      border-color 180ms ease,
+      background 180ms ease;
+  }
+
+  .resume-link span:last-child {
+    color: var(--profile-accent);
+  }
+
+  .resume-link:hover,
+  .resume-link:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--profile-accent);
+    background: var(--profile-soft);
   }
 
   .meta {

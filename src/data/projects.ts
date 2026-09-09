@@ -5,6 +5,13 @@ export type ProjectDetail = {
   text: string;
 };
 
+export type ProjectImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
 export type Project = {
   slug: string;
   title: string;
@@ -19,7 +26,7 @@ export type Project = {
   href?: string;
   linkLabel?: string;
   icon?: string;
-  images?: string[];
+  images?: ProjectImage[];
 };
 
 export const projects: Project[] = [
@@ -58,13 +65,38 @@ export const projects: Project[] = [
     featured: true,
     href: 'https://apps.apple.com/tr/app/talevd/id6788747924',
     linkLabel: 'View on App Store',
-    icon: '/projects/talevd/talevd_launcher_icon.png',
+    icon: '/projects/talevd/talevd-app-icon.webp',
     images: [
-      '/projects/talevd/TaleVD_AppStore_Screenshot_Create_Story_1284x2778.png',
-      '/projects/talevd/TaleVD_AppStore_Screenshot_01_1284x2778.png',
-      '/projects/talevd/TaleVD_AppStore_Screenshot_Story_01_FIXED_1284x2778(1).png',
-      '/projects/talevd/TaleVD_AppStore_Screenshot_Premium_1284x2778.png',
-      '/projects/talevd/TaleVD_AppStore_Screenshot_Story_Management_1284x2778.png',
+      {
+        src: '/projects/talevd/showcase-create-story.webp',
+        alt: 'TaleVD story creation screen with character, theme and age controls',
+        width: 720,
+        height: 1558,
+      },
+      {
+        src: '/projects/talevd/showcase-story-intro.webp',
+        alt: 'TaleVD story library showing personalized illustrated stories',
+        width: 720,
+        height: 1558,
+      },
+      {
+        src: '/projects/talevd/showcase-story-reading.webp',
+        alt: 'TaleVD illustrated story reading screen',
+        width: 720,
+        height: 1558,
+      },
+      {
+        src: '/projects/talevd/showcase-premium.webp',
+        alt: 'TaleVD premium plan and story credit benefits screen',
+        width: 720,
+        height: 1558,
+      },
+      {
+        src: '/projects/talevd/showcase-story-management.webp',
+        alt: 'TaleVD story settings screen with archive and delete actions',
+        width: 720,
+        height: 1558,
+      },
     ],
   },
   {
@@ -104,12 +136,42 @@ export const projects: Project[] = [
     linkLabel: 'Explore in Figma',
     icon: '/projects/focial/focial-logo.png',
     images: [
-      '/projects/focial/page-1_all-in-one.png',
-      '/projects/focial/page-2_recipes.png',
-      '/projects/focial/page-4_AI-assistant.png',
-      '/projects/focial/page-5_profile.png',
-      '/projects/focial/page-3_explore.png',
-      '/projects/focial/page-6_all-foods.png',
+      {
+        src: '/projects/focial/page-1_all-in-one.png',
+        alt: 'Focial home feed combining recipes, social posts and food discovery',
+        width: 166,
+        height: 296,
+      },
+      {
+        src: '/projects/focial/page-2_recipes.png',
+        alt: 'Focial recipe discovery and catalogue screen',
+        width: 166,
+        height: 296,
+      },
+      {
+        src: '/projects/focial/page-4_AI-assistant.png',
+        alt: 'Focial AI cooking assistant interface',
+        width: 166,
+        height: 296,
+      },
+      {
+        src: '/projects/focial/page-5_profile.png',
+        alt: 'Focial user profile and saved food content screen',
+        width: 166,
+        height: 296,
+      },
+      {
+        src: '/projects/focial/page-3_explore.png',
+        alt: 'Focial explore screen for discovering food content',
+        width: 166,
+        height: 296,
+      },
+      {
+        src: '/projects/focial/page-6_all-foods.png',
+        alt: 'Focial all-foods catalogue and filtering screen',
+        width: 166,
+        height: 296,
+      },
     ],
   },
   {
