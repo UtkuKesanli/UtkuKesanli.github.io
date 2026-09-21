@@ -53,20 +53,13 @@ Commit `package-lock.json` whenever dependencies change. Generated output and de
 
 Use descriptive kebab-case names for new project images. Include meaningful alt text and actual dimensions in the project data. Remove obsolete files once references have been updated.
 
-## Accessibility
+### Copyright
 
-The site includes semantic sections and headings, labelled navigation and carousel controls, descriptive screenshot alt text, and reduced-motion handling. Carousel autoplay pauses on interaction and is disabled when reduced motion is requested.
+Copyright © 2026 Utku Keşanlı. All rights reserved.
 
-These measures are not a claim of WCAG certification. CI checks Astro/TypeScript and builds the site; automated link checking and accessibility audits are possible future additions. Check keyboard navigation, focus visibility and mobile layouts when changing interactive components.
+The source code and original content of this portfolio are publicly available for viewing purposes only.
 
-## Deployment
-
-`.github/workflows/deploy.yml` runs on pushes to `main` and can also be started manually from GitHub Actions:
-
-1. Check out the repository and set up Node.js 22 with npm caching.
-2. Install locked dependencies with `npm ci`.
-3. Run `npm run check`; a failure blocks the build and deployment.
-4. Run `npm run build` and upload `dist/` as the Pages artifact.
+No permission is granted to reproduce, modify, redistribute, or use the original source code or content in other projects without prior written permission from the copyright holder.
 5. Deploy the successful artifact with `actions/deploy-pages`.
 
 In repository **Settings → Pages**, use **GitHub Actions** as the build and deployment source. This is a user site deployed at the domain root, so asset URLs are root-relative. Hosting beneath a repository subpath would also require updating Astro's base configuration and asset links.
