@@ -34,7 +34,7 @@ export const projects: Project[] = [
     title: 'TaleVD',
     subtitle: 'AI-Powered Illustrated Children’s Story App',
     shortDescription:
-      'A production iOS application for creating personalized, AI-generated and illustrated children’s stories. I independently designed, developed, tested and released the complete product — from the Flutter interface and Firebase architecture to AI generation workflows, subscriptions, security and App Store publication.',
+      'Independently designed, built and released an iOS story app with AI illustrations, Firebase and subscriptions.',
     status: 'Released',
     year: '2026',
     technologies: ['Flutter', 'Dart', 'Firebase', 'Cloud Functions', 'OpenAI API', 'App Check', 'IAP'],
@@ -102,7 +102,7 @@ export const projects: Project[] = [
     title: 'Focial',
     subtitle: 'AI-Powered Food & Social Platform',
     shortDescription:
-      'A food-focused mobile platform combining social networking, recipe discovery and AI-assisted cooking. In a three-person team, I owned the Figma product design and complete Flutter frontend, covering social flows, a large recipe catalogue, AI interfaces and Google Play billing states.',
+      'Owned the product design and Flutter frontend in a three-person team building a social food and recipe app.',
     status: 'Prototype',
     year: '2024 — 2025',
     technologies: ['Flutter', 'Dart', 'Figma', 'REST APIs', 'Google Play Billing'],
@@ -176,7 +176,7 @@ export const projects: Project[] = [
     title: 'Evender',
     subtitle: 'Calendar-First Culture & Release Tracker',
     shortDescription:
-      'An in-development mobile product that brings personal planning together with upcoming movies, series, games, anime, books and sports dates. It is being designed as a scalable Flutter and Firebase product with cost-conscious, replaceable data pipelines.',
+      'Building a Flutter and Firebase calendar for entertainment releases, sports dates and personal planning.',
     status: 'In development',
     year: '2026',
     technologies: ['Flutter', 'Firebase', 'TypeScript', 'Firestore'],

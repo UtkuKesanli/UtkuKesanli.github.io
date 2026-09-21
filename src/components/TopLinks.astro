@@ -14,7 +14,8 @@ const sectionLinks = [
   <nav>
     <a class="home-link" href="#home" aria-label="Back to top">UK</a>
 
-    <div class="nav-scroll">
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="portfolio-menu" hidden>Menu <span aria-hidden="true">☰</span></button>
+    <div class="nav-scroll" id="portfolio-menu">
       <div class="section-links" aria-label="Page sections">
         {sectionLinks.map((link) => (
           <a href={link.href} data-section-link={link.id}>{link.label}</a>
@@ -43,6 +44,19 @@ const sectionLinks = [
 
 <script>
   const initialiseSectionNavigation = () => {
+    const header = document.querySelector<HTMLElement>('.top-links');
+    const toggle = header?.querySelector<HTMLButtonElement>('.menu-toggle');
+    if (!header || !toggle || header.dataset.ready) return;
+    header.dataset.ready = 'true';
+    toggle.hidden = false;
+    const close = () => toggle.setAttribute('aria-expanded', 'false');
+    toggle.addEventListener('click', () => toggle.setAttribute('aria-expanded', String(toggle.getAttribute('aria-expanded') !== 'true')));
+    header.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { close(); toggle.focus(); }
+    });
+    header.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
+    document.addEventListener('click', event => { if (event.target instanceof Node && !header.contains(event.target)) close(); });
+
     const links = Array.from(document.querySelectorAll<HTMLElement>('[data-section-link]'));
     if (!links.length) return;
 
@@ -106,14 +120,14 @@ const sectionLinks = [
 
   .home-link {
     flex: 0 0 auto;
-    width: 34px;
-    height: 34px;
+    width: 44px;
+    height: 44px;
     display: grid;
     place-items: center;
     border: 1px solid var(--line-strong);
     border-radius: 50%;
     color: var(--accent);
-    font-size: 0.62rem;
+    font-size: 0.8rem;
     font-weight: 800;
     letter-spacing: 0.05em;
     transition: border-color 160ms ease, background 160ms ease;
@@ -152,11 +166,11 @@ const sectionLinks = [
     align-items: center;
     gap: 0.3rem;
     flex: 0 0 auto;
-    min-height: 34px;
+    min-height: 44px;
     padding: 0.45rem 0.7rem;
     border-radius: 999px;
     color: var(--text-muted);
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     transition: color 160ms ease, background 160ms ease;
   }
 
@@ -194,7 +208,7 @@ const sectionLinks = [
 
   .arrow {
     color: var(--accent);
-    font-size: 0.66rem;
+    font-size: 0.8rem;
   }
 
   .social-short {
@@ -223,15 +237,28 @@ const sectionLinks = [
     }
 
     .home-link {
-      width: 32px;
-      height: 32px;
+      width: 44px;
+      height: 44px;
     }
 
     .section-links a,
     .social-links a {
-      min-height: 32px;
+      min-height: 44px;
       padding: 0.4rem 0.62rem;
-      font-size: 0.67rem;
+      font-size: 0.8rem;
     }
+  }
+
+  .menu-toggle { display: none; }
+  @media (max-width: 1100px) {
+    nav { flex-wrap: wrap; border-radius: 24px; }
+    .menu-toggle:not([hidden]) { display: flex; align-items: center; gap: .75rem; margin-left: auto; min-height: 44px; padding: .6rem 1rem; border: 1px solid var(--line-strong); border-radius: 20px; background: var(--surface); color: var(--text); font: inherit; cursor: pointer; }
+    .nav-scroll { flex-basis: 100%; flex-direction: column; align-items: stretch; overflow: auto; max-height: calc(100dvh - 110px); padding: .5rem; }
+    .top-links[data-ready] .menu-toggle[aria-expanded="false"] + .nav-scroll { display: none; }
+    .section-links, .social-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; gap: .25rem; }
+    .section-links a, .social-links a { min-width: 0; font-size: .875rem; min-height: 44px; }
+    .social-full { display: inline; }
+    .social-short { display: none; }
+    .divider { width: 100%; height: 1px; margin: .5rem 0; }
   }
 </style>

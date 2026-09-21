@@ -1,14 +1,15 @@
 ---
 type Props = {
   title: string;
+  id?: string;
   description?: string;
 };
 
-const { title, description } = Astro.props;
+const { title, description, id } = Astro.props;
 ---
 
 <header class="section-heading">
-  <h2>{title}</h2>
+  <h2 id={id}>{title}</h2>
   {description && <p>{description}</p>}
 </header>
 

@@ -3,14 +3,14 @@
   --surface: #111111;
   --surface-soft: #171717;
   --text: #f4f2ed;
-  --text-muted: #9c9a94;
+  --text-muted: #b8b6b0;
   --line: rgba(244, 242, 237, 0.12);
   --line-strong: rgba(244, 242, 237, 0.22);
   --accent: #8f7cff;
   --accent-soft: rgba(143, 124, 255, 0.12);
   --accent-soft-strong: rgba(143, 124, 255, 0.24);
   --max-width: 1320px;
-  --topbar-height: 48px;
+  --topbar-height: 60px;
   --radius-sm: 12px;
   --radius-md: 18px;
   --radius-lg: 22px;
@@ -120,3 +120,21 @@ body .project-card[data-project='evender']:hover {
     transition-duration: 0.01ms !important;
   }
 }
+
+:where(a, button, summary):focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 4px;
+}
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.85rem 1.2rem;
+  background: var(--text);
+  color: var(--bg);
+  border-radius: 8px;
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: translateY(0); }
+#main-content { scroll-margin-top: 90px; }
