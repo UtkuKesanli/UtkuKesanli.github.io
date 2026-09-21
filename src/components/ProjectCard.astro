@@ -5,18 +5,15 @@ import ProjectLink from './ProjectLink.astro';
 
 type Props = {
   project: Project;
-  index: number;
 };
 
-const { project, index } = Astro.props;
-const displayIndex = String(index + 1).padStart(2, '0');
+const { project } = Astro.props;
 const images = project.images ?? [];
 const hasCarousel = images.length > 0;
 ---
 
 <article class="project-card" data-project={project.slug}>
   <div class="media-column">
-    <span class="project-index">{displayIndex}</span>
 
     {hasCarousel ? (
       <div class="project-carousel" data-project-carousel>
@@ -283,14 +280,6 @@ const hasCarousel = images.length > 0;
     min-width: 0;
     padding-right: clamp(1.5rem, 3vw, 2.5rem);
     border-right: 1px solid var(--line);
-  }
-
-  .project-index {
-    position: relative;
-    z-index: 6;
-    color: var(--project-accent);
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
   }
 
   .project-carousel {

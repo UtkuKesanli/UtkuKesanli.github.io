@@ -10,7 +10,6 @@ const { group } = Astro.props;
 
 <article class="skill-card">
   <div class="card-head">
-    <span class="index">{group.index}</span>
     <h3>{group.title}</h3>
   </div>
 
@@ -41,13 +40,7 @@ const { group } = Astro.props;
 
   .card-head {
     display: grid;
-    gap: 0.8rem;
-  }
-
-  .index {
-    color: var(--accent);
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
+    gap: 0;
   }
 
   h3 {

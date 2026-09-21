@@ -6,14 +6,13 @@ import { experiences } from '../data/experience';
 
 <section class="portfolio-section" id="experience" aria-labelledby="experience-title">
   <SectionHeading
-    index="04"
     title="Experience"
     description="Professional experience where mobile development, AI workflows and product thinking came together."
   />
 
   <div class="experience-list">
-    {experiences.map((experience, index) => (
-      <ExperienceCard experience={experience} index={index} />
+    {experiences.map((experience) => (
+      <ExperienceCard experience={experience} />
     ))}
   </div>
 </section>

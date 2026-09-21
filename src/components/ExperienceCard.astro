@@ -3,16 +3,13 @@ import type { Experience } from '../data/experience';
 
 type Props = {
   experience: Experience;
-  index: number;
 };
 
-const { experience, index } = Astro.props;
-const displayIndex = String(index + 1).padStart(2, '0');
+const { experience } = Astro.props;
 ---
 
 <article class="experience-card">
   <div class="meta-column">
-    <span class="card-index">{displayIndex}</span>
     <div class="meta-block">
       <span>{experience.period}</span>
       <span>{experience.location}</span>
@@ -62,12 +59,6 @@ const displayIndex = String(index + 1).padStart(2, '0');
     gap: 2rem;
     padding-right: 1rem;
     border-right: 1px solid var(--line);
-  }
-
-  .card-index {
-    color: var(--accent);
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
   }
 
   .meta-block {

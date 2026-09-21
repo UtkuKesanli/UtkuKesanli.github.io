@@ -1,13 +1,11 @@
 export type SkillGroup = {
   title: string;
-  index: string;
   skills: string[];
 };
 
 export const skillGroups: SkillGroup[] = [
   {
     title: 'Mobile Development',
-    index: '01',
     skills: [
       'Flutter',
       'Dart',
@@ -23,7 +21,6 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: 'UI / Product Design',
-    index: '02',
     skills: [
       'Figma',
       'Mobile UI/UX',
@@ -36,7 +33,6 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: 'Backend & Cloud',
-    index: '03',
     skills: [
       'Firebase Authentication',
       'Cloud Firestore',
@@ -50,7 +46,6 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: 'Tools & Platforms',
-    index: '04',
     skills: [
       'Git',
       'GitHub',

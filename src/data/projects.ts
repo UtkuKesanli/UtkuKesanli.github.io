@@ -22,7 +22,6 @@ export type Project = {
   technologies: string[];
   highlights: string[];
   details: ProjectDetail[];
-  featured: boolean;
   href?: string;
   linkLabel?: string;
   icon?: string;
@@ -62,7 +61,6 @@ export const projects: Project[] = [
         text: 'Implemented subscriptions, story-credit balances, purchase restoration, localization, moderation and verification flows, then handled the production App Store lifecycle and release preparation end-to-end.',
       },
     ],
-    featured: true,
     href: 'https://apps.apple.com/tr/app/talevd/id6788747924',
     linkLabel: 'View on App Store',
     icon: '/projects/talevd/talevd-app-icon.webp',
@@ -131,43 +129,42 @@ export const projects: Project[] = [
         text: 'Implemented Google Play in-app purchase states and contributed to closed-testing preparation, store assets and Play Console workflows while coordinating frontend requirements with the rest of the team.',
       },
     ],
-    featured: false,
     href: 'https://www.figma.com/design/GBq1Lk2WUMl7pBrh3gwc6r/Focial?m=auto&t=FnJofA8SSdlfZAvF-1',
     linkLabel: 'Explore in Figma',
     icon: '/projects/focial/focial-logo.png',
     images: [
       {
-        src: '/projects/focial/page-1_all-in-one.png',
+        src: '/projects/focial/showcase-home.png',
         alt: 'Focial home feed combining recipes, social posts and food discovery',
         width: 166,
         height: 296,
       },
       {
-        src: '/projects/focial/page-2_recipes.png',
+        src: '/projects/focial/showcase-recipes.png',
         alt: 'Focial recipe discovery and catalogue screen',
         width: 166,
         height: 296,
       },
       {
-        src: '/projects/focial/page-4_AI-assistant.png',
+        src: '/projects/focial/showcase-ai-assistant.png',
         alt: 'Focial AI cooking assistant interface',
         width: 166,
         height: 296,
       },
       {
-        src: '/projects/focial/page-5_profile.png',
+        src: '/projects/focial/showcase-profile.png',
         alt: 'Focial user profile and saved food content screen',
         width: 166,
         height: 296,
       },
       {
-        src: '/projects/focial/page-3_explore.png',
+        src: '/projects/focial/showcase-explore.png',
         alt: 'Focial explore screen for discovering food content',
         width: 166,
         height: 296,
       },
       {
-        src: '/projects/focial/page-6_all-foods.png',
+        src: '/projects/focial/showcase-all-foods.png',
         alt: 'Focial all-foods catalogue and filtering screen',
         width: 166,
         height: 296,
@@ -206,10 +203,7 @@ export const projects: Project[] = [
         text: 'Because the project is being built solo, the architecture prioritizes low recurring cost, replaceable data sources and gradual rollout rather than expensive all-at-once integrations.',
       },
     ],
-    featured: true,
     href: 'https://github.com/UtkuKesanli/evender',
     linkLabel: 'View on GitHub',
   },
 ];
-
-export const featuredProjects = projects.filter((project) => project.featured);

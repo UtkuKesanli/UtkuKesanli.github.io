@@ -1,6 +1,5 @@
 ---
 type Props = {
-  index?: string;
   title: string;
   description?: string;
 };
@@ -16,7 +15,7 @@ const { title, description } = Astro.props;
 <style>
   .section-heading {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+    grid-template-columns: 1fr;
     gap: clamp(3rem, 8vw, 7rem);
     align-items: end;
     margin-bottom: clamp(2.5rem, 5vw, 4.25rem);

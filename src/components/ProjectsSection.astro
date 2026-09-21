@@ -7,13 +7,12 @@ import { projects } from '../data/projects';
 <section class="projects-section" id="projects" aria-label="Projects">
   <div class="projects-inner">
     <SectionHeading
-      index="03"
       title="Products I’ve designed and built."
       description="A mix of released work, collaborative product development and what I’m currently building."
     />
 
     <div class="projects-grid">
-      {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+      {projects.map((project) => <ProjectCard project={project} />)}
     </div>
 
     <div class="future-card" aria-label="Future projects">

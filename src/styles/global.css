@@ -70,27 +70,6 @@ main {
   border-top: 1px solid var(--line);
 }
 
-/* Decorative numbering is intentionally hidden across the portfolio. */
-body .section-heading {
-  grid-template-columns: 1fr;
-}
-
-body .section-heading .label-row,
-body .project-card .project-index,
-body .experience-card .card-index,
-body .skill-card .index,
-body .principle-card > span {
-  display: none;
-}
-
-body .principle-card h4 {
-  margin-top: 0;
-}
-
-body .skill-card .card-head {
-  gap: 0;
-}
-
 /* Project-specific hover states. */
 body .project-card {
   scroll-margin-top: calc(var(--topbar-height) + 32px);

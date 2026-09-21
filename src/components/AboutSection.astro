@@ -3,17 +3,14 @@ import SectionHeading from './SectionHeading.astro';
 
 const principles = [
   {
-    index: '01',
     title: 'Engineering with product context',
     text: 'I do not treat the interface, backend and release process as separate problems. I like understanding the complete product flow and making technical decisions around the experience the user should actually have.',
   },
   {
-    index: '02',
     title: 'Design that survives implementation',
     text: 'My UI work starts in Figma but is shaped by real mobile constraints: reusable components, responsive layouts, loading and error states, localization, accessibility and maintainable Flutter code.',
   },
   {
-    index: '03',
     title: 'From prototype to production',
     text: 'I am most comfortable when I can follow a product beyond the first screen — connecting cloud services, securing workflows, integrating payments and taking the final build through store release.',
   },
@@ -23,7 +20,6 @@ const principles = [
 <section class="about-section" id="about" aria-labelledby="about-title">
   <div class="about-inner">
     <SectionHeading
-      index="02"
       title="About"
       description="A mobile developer with a product-design mindset, focused on turning ideas into software people can actually use."
     />
@@ -70,7 +66,6 @@ const principles = [
     <div class="principles-grid">
       {principles.map((principle) => (
         <article class="principle-card">
-          <span>{principle.index}</span>
           <h4>{principle.title}</h4>
           <p>{principle.text}</p>
         </article>
@@ -200,14 +195,8 @@ const principles = [
     background: var(--surface);
   }
 
-  .principle-card > span {
-    color: var(--accent);
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-  }
-
   h4 {
-    margin: 2.2rem 0 0.8rem;
+    margin: 0 0 0.8rem;
     font-size: clamp(1.15rem, 2vw, 1.55rem);
     letter-spacing: -0.035em;
   }
