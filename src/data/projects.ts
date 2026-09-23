@@ -38,18 +38,18 @@ export const projects: Project[] = [
     title: 'TaleVD',
     subtitle: 'AI-Powered Illustrated Children’s Story App',
     shortDescription:
-      'Independently designed, built and released an iOS story app with AI illustrations, Firebase and subscriptions.',
+      'Independently released an iOS story app with AI illustrations, subscriptions and 10-language UI and story generation.',
     role: 'Product design & development',
     team: 'Solo',
     platform: 'iOS',
-    keyOutcome: 'Published on the App Store',
+    keyOutcome: 'App Store release · UI and story generation in 10 languages',
     status: 'Released',
     year: '2026',
     technologies: ['Flutter', 'Dart', 'Firebase', 'Cloud Functions', 'OpenAI API', 'App Check', 'IAP'],
     highlights: [
       'Designed and developed independently end-to-end',
       'Secure Firebase backend and structured AI generation workflow',
-      'Subscriptions, credits and production App Store release',
+      '10-language UI and story generation; production App Store release',
     ],
     details: [
       {
@@ -63,6 +63,10 @@ export const projects: Project[] = [
       {
         title: 'AI & story workflow',
         text: 'Integrated AI-assisted story and illustration generation behind structured validation and generation states, then translated the outputs into a reading-first mobile experience with editable stories, reusable library content and child-focused presentation.',
+      },
+      {
+        title: 'Language support',
+        text: 'Both the app interface and story generation support English, Turkish, German, Japanese, Korean, French, Spanish, Italian, Brazilian Portuguese and Traditional Chinese (Taiwan).',
       },
       {
         title: 'Commerce & release',
@@ -114,13 +118,13 @@ export const projects: Project[] = [
     role: 'Product design & Flutter frontend',
     team: '3 people',
     platform: 'Flutter mobile',
-    keyOutcome: 'Integrated a catalogue of ~75,000 meals',
+    keyOutcome: 'Sourced and used a catalogue of ~75,000 meals',
     status: 'Prototype',
     year: '2024 — 2025',
     technologies: ['Flutter', 'Dart', 'Figma', 'REST APIs', 'Google Play Billing'],
     highlights: [
       'Owned the complete Flutter frontend and mobile product design',
-      'Integrated a recipe dataset of approximately 75,000 meals',
+      'Sourced and used a recipe dataset of approximately 75,000 meals',
       'Built social, AI-assisted cooking and premium purchase experiences',
     ],
     details: [
@@ -130,7 +134,7 @@ export const projects: Project[] = [
       },
       {
         title: 'Social & discovery',
-        text: 'Built profiles, follow relationships, feeds, posts, comments, bookmarks and search experiences alongside recipe discovery backed by a catalogue of roughly 75,000 meals and REST API integrations.',
+        text: 'Built profiles, follow relationships, feeds, posts, comments, bookmarks and search experiences. The team sourced and used a catalogue of roughly 75,000 meals for recipe discovery alongside REST API integrations.',
       },
       {
         title: 'AI cooking experiences',
