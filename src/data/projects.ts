@@ -17,6 +17,10 @@ export type Project = {
   title: string;
   subtitle: string;
   shortDescription: string;
+  role: string;
+  team: string;
+  platform: string;
+  keyOutcome: string;
   status: ProjectStatus;
   year: string;
   technologies: string[];
@@ -35,13 +39,17 @@ export const projects: Project[] = [
     subtitle: 'AI-Powered Illustrated Children’s Story App',
     shortDescription:
       'Independently designed, built and released an iOS story app with AI illustrations, Firebase and subscriptions.',
+    role: 'Product design & development',
+    team: 'Solo',
+    platform: 'iOS',
+    keyOutcome: 'Published on the App Store',
     status: 'Released',
     year: '2026',
     technologies: ['Flutter', 'Dart', 'Firebase', 'Cloud Functions', 'OpenAI API', 'App Check', 'IAP'],
     highlights: [
       'Designed and developed independently end-to-end',
       'Secure Firebase backend and structured AI generation workflow',
-      'Subscriptions, credits, localization and production App Store release',
+      'Subscriptions, credits and production App Store release',
     ],
     details: [
       {
@@ -58,7 +66,7 @@ export const projects: Project[] = [
       },
       {
         title: 'Commerce & release',
-        text: 'Implemented subscriptions, story-credit balances, purchase restoration, localization, moderation and verification flows, then handled the production App Store lifecycle and release preparation end-to-end.',
+        text: 'Implemented subscriptions, story-credit balances, purchase restoration, moderation and verification flows, then handled the production App Store lifecycle and release preparation end-to-end.',
       },
     ],
     href: 'https://apps.apple.com/tr/app/talevd/id6788747924',
@@ -103,6 +111,10 @@ export const projects: Project[] = [
     subtitle: 'AI-Powered Food & Social Platform',
     shortDescription:
       'Owned the product design and Flutter frontend in a three-person team building a social food and recipe app.',
+    role: 'Product design & Flutter frontend',
+    team: '3 people',
+    platform: 'Flutter mobile',
+    keyOutcome: 'Integrated a catalogue of ~75,000 meals',
     status: 'Prototype',
     year: '2024 — 2025',
     technologies: ['Flutter', 'Dart', 'Figma', 'REST APIs', 'Google Play Billing'],
@@ -176,13 +188,17 @@ export const projects: Project[] = [
     title: 'Evender',
     subtitle: 'Calendar-First Culture & Release Tracker',
     shortDescription:
-      'Building a Flutter and Firebase calendar for entertainment releases, sports dates and personal planning.',
+      'Exploring a calendar for entertainment releases, sports dates and personal planning through an early Flutter prototype.',
+    role: 'Product design & development',
+    team: 'Solo',
+    platform: 'Flutter mobile prototype',
+    keyOutcome: 'Early Flutter prototype available on GitHub',
     status: 'In development',
     year: '2026',
-    technologies: ['Flutter', 'Firebase', 'TypeScript', 'Firestore'],
+    technologies: ['Flutter', 'Firebase (planned)', 'Firestore (planned)', 'TypeScript backend (planned)'],
     highlights: [
       'Currently being designed and built as a solo project',
-      'Data-driven calendar aggregation across multiple content categories',
+      'Planning calendar aggregation across multiple content categories',
       'Architecture planned for incremental category and data-source expansion',
     ],
     details: [
@@ -192,7 +208,7 @@ export const projects: Project[] = [
       },
       {
         title: 'Expandable data model',
-        text: 'The application is being structured around category and source abstractions so movies, series, games, anime, books and sports can be expanded independently without coupling the UI to one provider or one fixed content schema.',
+        text: 'The proposed architecture uses category and source abstractions so movies, series, games, anime, books and sports can be expanded independently without coupling the UI to one provider or one fixed content schema.',
       },
       {
         title: 'Backend approach',

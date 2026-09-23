@@ -98,9 +98,6 @@ const hasCarousel = images.length > 0;
         <div class="project-title-block">
           <div class="project-kicker">
             <span>{project.year}</span>
-            <span class:list={['project-status', { developing: project.status === 'In development' }]}>
-              {project.status}
-            </span>
           </div>
 
           <h3>{project.title}</h3>
@@ -112,11 +109,14 @@ const hasCarousel = images.length > 0;
     {project.href && <ProjectLink href={project.href} label={project.linkLabel ?? 'View project'} />}
 
     <div class="description-box">
+      <dl class="project-facts">
+        <div><dt>Role</dt><dd>{project.role}</dd></div>
+        <div><dt>Team</dt><dd>{project.team}</dd></div>
+        <div><dt>Platform</dt><dd>{project.platform}</dd></div>
+        <div><dt>Status</dt><dd>{project.status}</dd></div>
+        <div class="project-fact-outcome"><dt>Key outcome</dt><dd>{project.keyOutcome}</dd></div>
+      </dl>
       <p class="project-description">{project.shortDescription}</p>
-
-      <ul class="project-highlights">
-        {project.highlights.slice(0, 2).map((highlight) => <li>{highlight}</li>)}
-      </ul>
 
       <div class="project-tech" aria-label={`${project.title} technologies`}>
         {project.technologies.map((technology) => <span>{technology}</span>)}
@@ -552,14 +552,6 @@ const hasCarousel = images.length > 0;
     text-transform: uppercase;
   }
 
-  .project-status {
-    color: rgba(244, 242, 237, 0.78);
-  }
-
-  .project-status.developing {
-    color: var(--project-accent);
-  }
-
   h3 {
     margin: 0;
     font-size: clamp(2.7rem, 5vw, 5rem);
@@ -578,45 +570,44 @@ const hasCarousel = images.length > 0;
   .description-box {
     align-self: start;
     display: grid;
-    gap: 1.75rem;
+    gap: 1.1rem;
     padding: clamp(1.65rem, 3vw, 2.55rem);
     border: 1px solid var(--line-strong);
     border-radius: var(--radius-md);
     background: rgba(255, 255, 255, 0.016);
   }
 
+  .project-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem 1.2rem;
+    margin: 0;
+  }
+
+  .project-facts > div { min-width: 0; }
+  .project-facts dt {
+    margin-bottom: 0.25rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+  .project-facts dd {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.94rem;
+    line-height: 1.4;
+  }
+  .project-fact-outcome {
+    grid-column: 1 / -1;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--line);
+  }
+  .project-fact-outcome dd { color: var(--project-accent); font-weight: 650; }
+
   .project-description {
     margin: 0;
     color: rgba(244, 242, 237, 0.9);
     font-size: clamp(1.06rem, 1.45vw, 1.2rem);
     line-height: 1.78;
-  }
-
-  .project-highlights {
-    display: grid;
-    gap: 0.72rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .project-highlights li {
-    position: relative;
-    padding-left: 1.15rem;
-    color: var(--text);
-    font-size: 0.9rem;
-    line-height: 1.55;
-  }
-
-  .project-highlights li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.64em;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--project-accent);
   }
 
   .project-tech {

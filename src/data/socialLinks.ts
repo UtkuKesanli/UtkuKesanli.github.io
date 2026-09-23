@@ -18,7 +18,7 @@ export const socialLinks: SocialLink[] = [
   {
     label: 'Figma',
     shortLabel: 'FG',
-    href: 'https://www.figma.com/files/team/1424934349422750813/folder/363344836?fuid=1424934347245127700',
+    href: 'https://www.figma.com/design/GBq1Lk2WUMl7pBrh3gwc6r/Focial',
   },
   {
     label: 'Email',
