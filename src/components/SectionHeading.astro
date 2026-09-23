@@ -16,17 +16,17 @@ const { title, description, id } = Astro.props;
 <style>
   .section-heading {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: clamp(3rem, 8vw, 7rem);
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.55fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
     align-items: end;
-    margin-bottom: clamp(2.5rem, 5vw, 4.25rem);
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
     padding-bottom: clamp(1.25rem, 2.5vw, 2rem);
     border-bottom: 1px solid var(--line);
   }
 
   h2 {
     margin: 0;
-    max-width: 13ch;
+    max-width: 15ch;
     font-size: clamp(2.4rem, 5vw, 5rem);
     line-height: 0.95;
     letter-spacing: -0.055em;
@@ -35,7 +35,7 @@ const { title, description, id } = Astro.props;
 
   p {
     margin: 0;
-    max-width: 48ch;
+    max-width: 40ch;
     justify-self: end;
     color: var(--text-muted);
     line-height: 1.7;
@@ -45,8 +45,8 @@ const { title, description, id } = Astro.props;
   @media (max-width: 760px) {
     .section-heading {
       grid-template-columns: 1fr;
-      gap: 1.1rem;
-      margin-bottom: 2rem;
+      gap: 0.9rem;
+      margin-bottom: 1.5rem;
       padding-bottom: 1.25rem;
     }
 

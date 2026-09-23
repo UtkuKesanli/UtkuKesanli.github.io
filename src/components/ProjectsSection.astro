@@ -14,15 +14,6 @@ import { projects } from '../data/projects';
     <div class="projects-grid">
       {projects.map((project) => <ProjectCard project={project} />)}
     </div>
-
-    <div class="future-card" aria-label="Future projects">
-      <span class="future-mark">+</span>
-      <div>
-        <p>MORE TO COME</p>
-        <h3>And many more future projects.</h3>
-        <span>This portfolio is built to grow alongside the things I build next.</span>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -42,58 +33,12 @@ import { projects } from '../data/projects';
   .projects-grid {
     display: grid;
     gap: 1rem;
-    margin-top: clamp(2.5rem, 5vw, 4.5rem);
-  }
-
-  .future-card {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: center;
-    gap: 1.25rem;
-    margin-top: 1rem;
-    padding: 1.4rem 1.6rem;
-    border: 1px dashed var(--line-strong);
-    border-radius: var(--radius-lg);
-    background: rgba(255,255,255,0.012);
-  }
-
-  .future-mark {
-    display: grid;
-    place-items: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: var(--accent-soft);
-    color: var(--accent);
-    font-size: 1.5rem;
-  }
-
-  .future-card p {
-    margin: 0 0 0.3rem;
-    color: var(--accent);
-    font-size: 0.8rem;
-    letter-spacing: 0.14em;
-  }
-
-  .future-card h3 {
-    margin: 0 0 0.35rem;
-    font-size: clamp(1.2rem, 2vw, 1.65rem);
-    letter-spacing: -0.03em;
-  }
-
-  .future-card div > span {
-    color: var(--text-muted);
-    font-size: 0.86rem;
-    line-height: 1.5;
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
   }
 
   @media (max-width: 640px) {
     .projects-section {
       padding-inline: 1rem;
-    }
-
-    .future-card {
-      align-items: flex-start;
     }
   }
 </style>
