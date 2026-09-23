@@ -20,11 +20,9 @@ const { group } = Astro.props;
 
 <style>
   .skill-card {
-    min-height: 245px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 2rem;
+    gap: 1.4rem;
     padding: clamp(1.3rem, 2.5vw, 1.8rem);
     border: 1px solid var(--line-strong);
     border-radius: var(--radius-lg);
@@ -69,11 +67,5 @@ const { group } = Astro.props;
 
   .skill-card:hover .skill-chip {
     border-color: rgba(143, 124, 255, 0.2);
-  }
-
-  .skill-chip:hover {
-    color: var(--text);
-    border-color: var(--accent) !important;
-    background: var(--accent-soft);
   }
 </style>
